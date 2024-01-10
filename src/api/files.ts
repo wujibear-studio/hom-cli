@@ -1,10 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import * as os from 'os'
 import {settings} from './config.js'
 import { setupFilePath } from '../utils/files.js'
 
-const shellFilePath = ({name, type, namespace}: Entry) => {
+export const shellFilePath = ({name, type, namespace}: Entry) => {
   return setupFilePath(path.join(namespace || settings.defaultNamespace, type, `${name}.sh`))
 }
 
