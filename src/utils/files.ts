@@ -3,10 +3,12 @@ import * as path from 'path'
 import * as os from 'os'
 import {settings} from '../api/config.js'
 
-interface PathDetails {
-  namespace?: string;
-  type?: string;
-  name?: string;
+export const ShellFileTypes = {
+  alias: 'aliases',
+  export: 'exports',
+  function: 'functions',
+  partial: 'partials',
+  script: 'scripts',
 }
 
 export const homDir = path.join(os.homedir(), '.hom')
@@ -15,8 +17,13 @@ export function namespaceDir(namespace: string): string {
   return path.join(homDir, namespace)
 }
 
+export interface PathDetails {
+  namespace?: string;
+  type?: string;
+  name?: string;
+}
+
 export function closestPath({namespace, type, name}: PathDetails): string {
-  if (!namespace && type) namespace = settings.defaultNamespace
   const crumb = [homDir]
   namespace && crumb.push(namespace)
   namespace && type && crumb.push(type)
@@ -34,7 +41,7 @@ export const setupFilePath = (filePath: string) => {
   return pathValue
 }
 
-function listNamespaces(): string[] {
+export function listNamespaces(): string[] {
   const files = fs.readdirSync(homDir)
 
   return files.reduce((acc: string[], file) => {
@@ -46,5 +53,5 @@ function listNamespaces(): string[] {
   }, [])
 }
 
-function listFiles() {
+export function listFiles() {
 } 
