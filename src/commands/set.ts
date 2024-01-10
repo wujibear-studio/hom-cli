@@ -1,6 +1,5 @@
 import {Command, Flags} from '@oclif/core'
 import { setShellType, setNamespace, setEditor } from '../api/prompts.js'
-import RunCode from '../api/RunCode.js'
 
 export default class Set extends Command {
   static description = 'sets default <%= config.bin %> configurations'
@@ -17,7 +16,6 @@ export default class Set extends Command {
 
   public async run(): Promise<void> {
     const {flags} = await this.parse(Set)
-    await RunCode('ls -la')
 
     if (flags.namespace) await setNamespace(flags.namespace)
     if (flags.shell) await setShellType(flags.shell)
