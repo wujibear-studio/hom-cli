@@ -1,14 +1,13 @@
 {
   "author": "wujibear @wujibear",
-  "bin": {
-    "hom": "./bin/run.js"
-  },
+  "bin": "./bin/run.js",
   "dependencies": {
+    "@inquirer/prompts": "^3.3.0",
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4"
   },
-  "description": "oclif example Hello World CLI (ESM)",
+  "description": "HOM, the CLI shell manager",
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^3",
@@ -46,6 +45,7 @@
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
     ],
+    "jitPlugins": {},
     "topicSeparator": " ",
     "topics": {
       "hello": {
@@ -71,5 +71,9 @@
   ],
   "types": "dist/index.d.ts",
   "exports": "./lib/index.js",
-  "type": "module"
+  "type": "module",
+  "volta": {
+    "node": "20.10.0",
+    "yarn": "3.7.0"
+  }
 }
