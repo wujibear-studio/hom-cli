@@ -4,12 +4,13 @@ import * as fs from 'fs'
 import { closestPath, ShellFileTypes } from '../utils/files.js'
 import {confirm} from '@inquirer/prompts'
 import FileAPI from '../api/files.js'
+import { template } from '../api/templates.js'
 
 export default class Alias extends NamespacedCommand {
   static description = 'creates a command line alias'
 
   static examples = [
-    '<%= config.bin %> <%= command.id %> ',
+    '<%= config.bin %> <%= command.id %> alias_name "some kind of content"',
   ]
 
   static args = {
@@ -21,17 +22,16 @@ export default class Alias extends NamespacedCommand {
     const {args, flags} = await this.parse(Alias)
     const {name, content} = args
     const {namespace} = flags
-    this.log('aliasing', name, content, namespace)
     const filePath = closestPath({namespace, type: ShellFileTypes.alias, name})
 
-    this.log('filePath', filePath)
-    // if (fs.existsSync(filePath)) {
-    //   const overwrite = await confirm({
-    //     message: `exists already. Overwrite?`,
-    //     default: true
-    //   })
-    //   if (!overwrite) return
-    // }
-    // new FileAPI(filePath).write(args.value)
+    if (fs.existsSync(filePath)) {
+      const overwrite = await confirm({
+        message: `The alias '${name}' exists already. Overwrite?`,
+        default: true
+      })
+      if (!overwrite) return
+    }
+    const fileContent = await template.render('alias', {aliasName: name, content})
+    new FileAPI(filePath).write(fileContent)
   }
 }

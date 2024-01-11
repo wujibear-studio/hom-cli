@@ -32,13 +32,11 @@ export function closestPath({namespace, type, name}: PathDetails): string {
   return crumb.join('/')
 }
 
-export const setupFilePath = (filePath: string) => {
-  const pathValue = path.join(homDir, filePath)
-  if (!fs.existsSync(path.dirname(pathValue))) {
-    fs.mkdirSync(path.dirname(pathValue))
+export function setupFilePath(filePath: string) {
+  if (!fs.existsSync(path.dirname(filePath))) {
+    fs.mkdirSync(path.dirname(filePath), {recursive: true})
   }
-  
-  return pathValue
+  return filePath
 }
 
 export function listNamespaces(): string[] {

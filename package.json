@@ -5,7 +5,8 @@
     "@inquirer/prompts": "^3.3.0",
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^4"
+    "@oclif/plugin-plugins": "^4",
+    "liquidjs": "^10.10.0"
   },
   "description": "HOM, the CLI shell manager",
   "devDependencies": {
@@ -43,7 +44,9 @@
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-plugins",
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-autocomplete"
     ],
     "jitPlugins": {},
     "topicSeparator": " ",

@@ -1,26 +1,15 @@
 import * as fs from 'fs'
-import * as path from 'path'
-import {settings} from './config.js'
 import { setupFilePath } from '../utils/files.js'
-
-export const shellFilePath = ({name, type, namespace}: Entry) => {
-  return setupFilePath(path.join(namespace || settings.defaultNamespace, type, `${name}.sh`))
-}
-
-interface Entry {
-  name: string;
-  type: string;
-  namespace?: string;
-}
 
 export default class FileAPI {
   public filePath : string 
 
-  constructor (entry: Entry) {
-    this.filePath = shellFilePath(entry)
+  constructor (filePath: string) {
+    this.filePath = filePath
   }
 
   write (content: string) {
+    setupFilePath(this.filePath)
     fs.writeFileSync(this.filePath, content, { encoding: 'utf-8' })
   }
 

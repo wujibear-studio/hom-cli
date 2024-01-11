@@ -1,7 +1,5 @@
 import {Args, Command, Flags} from '@oclif/core'
-import { settings } from '../api/config.js'
 import { Exec } from '../api/shell.js'
-import { shellFilePath, shellFileTypes } from '../api/files.js'
 import { closestPath } from '../utils/files.js'
 
 export default class Edit extends Command {
