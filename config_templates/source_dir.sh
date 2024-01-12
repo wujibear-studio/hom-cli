@@ -7,7 +7,7 @@ function source_dir() {
   # Source all custom files within config folders
   for folder in ${SUPPORTED_HOM_TYPES[@]}
   do
-    for file in $1/$folder/*.zsh
+    for file in $1/$folder/*.sh
     do
       if [[ -f $file ]]
       then
