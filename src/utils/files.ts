@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 import {settings} from '../api/config.js'
+import { selectShellType } from '../api/prompts.js'
 
 export const ShellFileTypes = {
   alias: 'aliases',
@@ -11,10 +12,15 @@ export const ShellFileTypes = {
   script: 'scripts',
 }
 
-export const homDir = path.join(os.homedir(), '.hom')
+export const FileTypeKeys = Object.keys(ShellFileTypes)
+
+export const HOM_DIR = path.join(os.homedir(), '.hom')
+export const CORE_DIR = path.join(HOM_DIR, '.core')
+const GITIGNORE_PATH = path.join(HOM_DIR, '.gitignore')
+const SOURCE_LINE = `source ${CORE_DIR}/init.sh`
 
 export function namespaceDir(namespace: string): string {
-  return path.join(homDir, namespace)
+  return path.join(HOM_DIR, namespace)
 }
 
 export interface PathDetails {
@@ -24,7 +30,7 @@ export interface PathDetails {
 }
 
 export function closestPath({namespace, type, name}: PathDetails): string {
-  const crumb = [homDir]
+  const crumb = [HOM_DIR]
   namespace && crumb.push(namespace)
   namespace && type && crumb.push(type)
   namespace && type && name && crumb.push(`${name}.sh`)
@@ -40,12 +46,12 @@ export function setupFilePath(filePath: string) {
 }
 
 export function listNamespaces(): string[] {
-  const files = fs.readdirSync(homDir)
+  const files = fs.readdirSync(HOM_DIR)
 
   return files.reduce((acc: string[], file) => {
-    console.log('spit file', file)
-    const filePath = path.join(homDir, file)
-    if (fs.lstatSync(filePath).isDirectory()) acc.push(filePath)
+    const filePath = path.join(HOM_DIR, file)
+    const isDir = fs.lstatSync(filePath).isDirectory()
+    if (isDir && !file.match(/^\./)) acc.push(file)
 
     return acc
   }, [])
@@ -53,3 +59,49 @@ export function listNamespaces(): string[] {
 
 export function listFiles() {
 } 
+
+export async function setupShellSourceFiles() {
+  fs.mkdirSync(CORE_DIR, {recursive: true})
+  if (!fs.existsSync(GITIGNORE_PATH)) fs.cpSync(`${process.cwd()}/config_templates/gitignore`, GITIGNORE_PATH)
+
+  fs.cpSync(`${process.cwd()}/config_templates`, CORE_DIR, {recursive: true, force: true})
+}
+
+/*
+ * 1 profile:
+ *   - installed? break
+ *   - no? install
+ * X profiles:
+ *   - choose! 
+ *   - installed? break
+ *   - no? install
+ */
+export async function installShell() {
+  const profiles = installedShellProfiles()
+  let chosenProfile = profiles[0]
+
+  if (profiles.length != 1) {
+    chosenProfile = await selectShellType()
+  }
+
+  if (fs.existsSync(chosenProfile) && profileHasInit(chosenProfile)) return
+  if (!fs.existsSync(chosenProfile)) return fs.writeFileSync(chosenProfile, SOURCE_LINE)
+  fs.appendFileSync(chosenProfile, SOURCE_LINE)
+}
+
+function installedShellProfiles() {
+  const profiles = []
+  const bash = path.join(os.homedir(), '.bashrc')
+  const zsh = path.join(os.homedir(), '.zshrc')
+  if (fs.existsSync(bash)) profiles.push(bash)
+  if (fs.existsSync(zsh)) profiles.push(zsh)
+
+  return profiles
+}
+
+function profileHasInit(file: string) {
+
+  const data = fs.readFileSync(file)
+
+  return `${data}`.match(SOURCE_LINE)
+}

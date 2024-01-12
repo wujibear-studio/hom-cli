@@ -1,18 +1,22 @@
 import { config } from '../api/config.js'
 import {select, input} from '@inquirer/prompts'
 
-export async function setShellType(shellType?: string) {
-  if (config.settings.shellType) return 
-
-  shellType ||= await select({
-    message: "Which shell do you use?",
+export async function selectShellType() {
+  let file = await select({
+    message: "Which shell file should we append Hom setup to?",
     choices: [
-      {name: 'ZSH', value: 'zsh'},
-      {name: 'Bash', value: 'bash'},
+      {name: 'ZSH', value: '.zshrc'},
+      {name: 'Bash', value: '.bashrc'},
+      {name: 'Other', value: 'other'},
     ]
   })
+  if (file == 'other') {
+    file = await input({
+      message: 'Type the filename we should append Hom setup details to'
+    })
+  }
 
-  config.set({shellType})
+  return file
 }
 
 export async function setNamespace(defaultNamespace?: string) {
@@ -35,7 +39,7 @@ export async function setEditor(editor?: string) {
   if (process.env.EDITOR) return
 
   editor ||= await select({
-    message: "What's your favorite code editor?",
+    message: "Which code editor do you use?",
     choices: [
       {
         name: 'vim',
@@ -54,7 +58,7 @@ export async function setEditor(editor?: string) {
 
   if (editor == 'other') {
     editor = await input({
-      message: 'Type the command for your editor'
+      message: 'Type the command to open your editor'
     })
   }
 

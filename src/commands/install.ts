@@ -1,25 +1,30 @@
 import {Command, Flags} from '@oclif/core'
-import { setShellType, setNamespace } from '../api/prompts.js'
+import { setNamespace } from '../api/prompts.js'
+import { installShell, setupShellSourceFiles } from '../utils/files.js'
 
 export default class Install extends Command {
-  static description = 'installs <%= config.bin %> config directory, sets defaults'
+  static description = 'installs <%= config.bin %> dependencies, sets defaults'
 
   static examples = [
-    '<%= config.bin %> <%= command.id %> -r=https://github.com/you/hom-config',
+    '<%= config.bin %> <%= command.id %>',
   ]
 
-  static flags = {
-    repo: Flags.string({char: 'r', description: 'a git repository to use as a template'}),
-  }
+  // static flags = {
+  //   repository: Flags.string({
+  //     char: 'r',
+  //     description: 'a git repository to use as a template',
+  //     aliases: ['repo']
+  //   }),
+  //   namespace: Flags.string({
+  //     char: 'n',
+  //     description: 'the path within the repo to a specific namespace to install',
+  //     dependsOn: ['repository']
+  //   }),
+  // }
 
   public async run(): Promise<void> {
-    const {flags} = await this.parse(Install)
-
-    if (flags.repo) {
-      this.log(`--repo: ${flags.repo}`)
-    } else {
-      await setShellType()
-      await setNamespace()
-    }
+    await setupShellSourceFiles()
+    await installShell()
+    await setNamespace()
   }
 }
