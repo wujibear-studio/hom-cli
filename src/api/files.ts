@@ -10,7 +10,7 @@ export default class FileAPI {
 
   write (content: string) {
     setupFilePath(this.filePath)
-    fs.writeFileSync(this.filePath, content, { encoding: 'utf-8' })
+    fs.writeFileSync(this.filePath, content, { encoding: 'utf-8', mode: '755' })
   }
 
   read () {
