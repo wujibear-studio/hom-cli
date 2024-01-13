@@ -67,6 +67,7 @@
     "prepack": "yarn build && oclif manifest && oclif readme",
     "prepare": "yarn build",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "pack:this": "oclif pack",
     "version": "oclif readme && git add README.md"
   },
   "version": "0.0.0",

@@ -1,7 +1,7 @@
-oclif-hello-world
+HöM CLI
 =================
 
-oclif example Hello World CLI
+The `hom` CLI gives you tools to manage and organize your personal utility scripts. Create your own namepsaced scripts, aliases, exports, functions, and partials often without needing to open an editor. Utilities you create are organized by type e.g., `~/.hom/NAMESPACE/aliases/YOUR_ALIAS.sh`
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
