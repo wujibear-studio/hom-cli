@@ -4383,9 +4383,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hom@workspace:.":
+"hom-cli@workspace:.":
   version: 0.0.0-use.local
-  resolution: "hom@workspace:."
+  resolution: "hom-cli@workspace:."
   dependencies:
     "@inquirer/prompts": ^3.3.0
     "@oclif/core": ^3
@@ -4408,7 +4408,7 @@ __metadata:
     ts-node: ^10.9.2
     typescript: ^5
   bin:
-    hom: bin/run.js
+    hom-cli: bin/run.js
   languageName: unknown
   linkType: soft
 

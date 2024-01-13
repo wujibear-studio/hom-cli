@@ -14,138 +14,282 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g oclif-hello-world
-$ oex COMMAND
+$ npm install -g hom-cli
+$ hom COMMAND
 running command...
-$ oex (--version)
-oclif-hello-world/0.0.0 darwin-x64 node-v16.13.1
-$ oex --help [COMMAND]
+$ hom (--version)
+hom-cli/0.0.0 darwin-x64 node-v20.10.0
+$ hom --help [COMMAND]
 USAGE
-  $ oex COMMAND
+  $ hom COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`oex hello PERSON`](#oex-hello-person)
-* [`oex hello world`](#oex-hello-world)
-* [`oex help [COMMAND]`](#oex-help-command)
-* [`oex plugins`](#oex-plugins)
-* [`oex plugins:inspect PLUGIN...`](#oex-pluginsinspect-plugin)
-* [`oex plugins:install PLUGIN...`](#oex-pluginsinstall-plugin)
-* [`oex plugins:link PLUGIN`](#oex-pluginslink-plugin)
-* [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin)
-* [`oex plugins update`](#oex-plugins-update)
+* [`hom alias NAME CONTENT`](#hom-alias-name-content)
+* [`hom edit [NAME]`](#hom-edit-name)
+* [`hom export NAME CONTENT`](#hom-export-name-content)
+* [`hom function [NAME]`](#hom-function-name)
+* [`hom help [COMMANDS]`](#hom-help-commands)
+* [`hom install`](#hom-install)
+* [`hom list [NAME]`](#hom-list-name)
+* [`hom ls [NAME]`](#hom-ls-name)
+* [`hom partial [NAME]`](#hom-partial-name)
+* [`hom plugins`](#hom-plugins)
+* [`hom plugins:install PLUGIN...`](#hom-pluginsinstall-plugin)
+* [`hom plugins:inspect PLUGIN...`](#hom-pluginsinspect-plugin)
+* [`hom plugins:install PLUGIN...`](#hom-pluginsinstall-plugin-1)
+* [`hom plugins:link PLUGIN`](#hom-pluginslink-plugin)
+* [`hom plugins:uninstall PLUGIN...`](#hom-pluginsuninstall-plugin)
+* [`hom plugins reset`](#hom-plugins-reset)
+* [`hom plugins:uninstall PLUGIN...`](#hom-pluginsuninstall-plugin-1)
+* [`hom plugins:uninstall PLUGIN...`](#hom-pluginsuninstall-plugin-2)
+* [`hom plugins update`](#hom-plugins-update)
+* [`hom run [NAME]`](#hom-run-name)
+* [`hom script [NAME]`](#hom-script-name)
+* [`hom set`](#hom-set)
 
-## `oex hello PERSON`
+## `hom alias NAME CONTENT`
 
-Say hello
+creates a command line alias
 
 ```
 USAGE
-  $ oex hello [PERSON] -f <value>
+  $ hom alias NAME CONTENT [-n <value>]
 
 ARGUMENTS
-  PERSON  Person to say hello to
+  NAME     the call name of your alias
+  CONTENT  the content of your alias
 
 FLAGS
-  -f, --from=<value>  (required) Who is saying hello
+  -n, --namespace=<value>  [default: user] namespace directory to use
 
 DESCRIPTION
-  Say hello
+  creates a command line alias
 
 EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  $ hom alias alias_name "some kind of content"
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/alias.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/alias.ts)_
 
-## `oex hello world`
+## `hom edit [NAME]`
 
-Say hello world
+sets default hom configurations
 
 ```
 USAGE
-  $ oex hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ oex hello world
-  hello world! (./src/commands/hello/world.ts)
-```
-
-## `oex help [COMMAND]`
-
-Display help for oex.
-
-```
-USAGE
-  $ oex help [COMMAND] [-n]
+  $ hom edit [NAME] [-n <value>] [-t alias|export|function|partial|script]
 
 ARGUMENTS
-  COMMAND  Command to show help for.
+  NAME  filename to edit (omit the extension)
+
+FLAGS
+  -n, --namespace=<value>  namespace
+  -t, --type=<option>      type of files to edit
+                           <options: alias|export|function|partial|script>
+
+DESCRIPTION
+  sets default hom configurations
+
+EXAMPLES
+  $ hom edit -n=mycompany
+```
+
+_See code: [dist/commands/edit.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/edit.ts)_
+
+## `hom export NAME CONTENT`
+
+creates a command line export
+
+```
+USAGE
+  $ hom export NAME CONTENT [-n <value>]
+
+ARGUMENTS
+  NAME     the call name of your export (case insensitive)
+  CONTENT  the content of your export
+
+FLAGS
+  -n, --namespace=<value>  [default: user] namespace directory to use
+
+DESCRIPTION
+  creates a command line export
+
+EXAMPLES
+  $ hom export export_name "some kind of content"
+```
+
+_See code: [dist/commands/export.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/export.ts)_
+
+## `hom function [NAME]`
+
+sets default hom configurations
+
+```
+USAGE
+  $ hom function [NAME] [-n <value>] [-c <value>] [-d <value>]
+
+ARGUMENTS
+  NAME  filename to edit
+
+FLAGS
+  -c, --content=<value>      content of the function. Skips opening the editor when given
+  -d, --description=<value>  A description of what your function does
+  -n, --namespace=<value>    [default: user] namespace directory to use
+
+DESCRIPTION
+  sets default hom configurations
+
+EXAMPLES
+  $ hom function -n=mycompany
+```
+
+_See code: [dist/commands/function.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/function.ts)_
+
+## `hom help [COMMANDS]`
+
+Display help for hom.
+
+```
+USAGE
+  $ hom help [COMMANDS] [-n]
+
+ARGUMENTS
+  COMMANDS  Command to show help for.
 
 FLAGS
   -n, --nested-commands  Include all nested commands in the output.
 
 DESCRIPTION
-  Display help for oex.
+  Display help for hom.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/lib/commands/help.ts)_
 
-## `oex plugins`
+## `hom install`
+
+installs hom dependencies, sets defaults
+
+```
+USAGE
+  $ hom install
+
+DESCRIPTION
+  installs hom dependencies, sets defaults
+
+EXAMPLES
+  $ hom install
+```
+
+_See code: [dist/commands/install.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/install.ts)_
+
+## `hom list [NAME]`
+
+sets default hom configurations
+
+```
+USAGE
+  $ hom list [NAME] [-n <value>]
+
+ARGUMENTS
+  NAME  filename to edit (omit the extension)
+
+FLAGS
+  -n, --namespace=<value>  namespace
+
+DESCRIPTION
+  sets default hom configurations
+
+ALIASES
+  $ hom ls
+
+EXAMPLES
+  $ hom list -n=mycompany
+```
+
+_See code: [dist/commands/list.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/list.ts)_
+
+## `hom ls [NAME]`
+
+sets default hom configurations
+
+```
+USAGE
+  $ hom ls [NAME] [-n <value>]
+
+ARGUMENTS
+  NAME  filename to edit (omit the extension)
+
+FLAGS
+  -n, --namespace=<value>  namespace
+
+DESCRIPTION
+  sets default hom configurations
+
+ALIASES
+  $ hom ls
+
+EXAMPLES
+  $ hom ls -n=mycompany
+```
+
+## `hom partial [NAME]`
+
+creates a partial that will be loaded in your shell
+
+```
+USAGE
+  $ hom partial [NAME] [-n <value>] [-c <value>] [-d <value>]
+
+ARGUMENTS
+  NAME  filename to edit
+
+FLAGS
+  -c, --content=<value>      content of the function. Skips opening the editor when given
+  -d, --description=<value>  A description of what your function does
+  -n, --namespace=<value>    [default: user] namespace directory to use
+
+DESCRIPTION
+  creates a partial that will be loaded in your shell
+
+EXAMPLES
+  $ hom partial -n=mycompany
+```
+
+_See code: [dist/commands/partial.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/partial.ts)_
+
+## `hom plugins`
 
 List installed plugins.
 
 ```
 USAGE
-  $ oex plugins [--core]
+  $ hom plugins [--json] [--core]
 
 FLAGS
   --core  Show core plugins.
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
   List installed plugins.
 
 EXAMPLES
-  $ oex plugins
+  $ hom plugins
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/index.ts)_
 
-## `oex plugins:inspect PLUGIN...`
-
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ oex plugins:inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ oex plugins:inspect myplugin
-```
-
-## `oex plugins:install PLUGIN...`
+## `hom plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ oex plugins:install PLUGIN...
+  $ hom plugins add plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -153,11 +297,14 @@ ARGUMENTS
 FLAGS
   -f, --force    Run yarn install with force flag.
   -h, --help     Show CLI help.
-  -v, --verbose
+  -s, --silent   Silences yarn output.
+  -v, --verbose  Show verbose yarn output.
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
   Installs a plugin into the CLI.
-
   Can be installed from npm or a git url.
 
   Installation of a user-installed plugin will override a core plugin.
@@ -166,51 +313,126 @@ DESCRIPTION
   will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
   the CLI without the need to patch and update the whole CLI.
 
+
 ALIASES
-  $ oex plugins add
+  $ hom plugins add
 
 EXAMPLES
-  $ oex plugins:install myplugin 
+  $ hom plugins add myplugin 
 
-  $ oex plugins:install https://github.com/someuser/someplugin
+  $ hom plugins add https://github.com/someuser/someplugin
 
-  $ oex plugins:install someuser/someplugin
+  $ hom plugins add someuser/someplugin
 ```
 
-## `oex plugins:link PLUGIN`
+## `hom plugins:inspect PLUGIN...`
 
-Links a plugin into the CLI for development.
+Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ oex plugins:link PLUGIN
+  $ hom plugins inspect PLUGIN...
 
 ARGUMENTS
-  PATH  [default: .] path to plugin
+  PLUGIN  [default: .] Plugin to inspect.
 
 FLAGS
   -h, --help     Show CLI help.
   -v, --verbose
 
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Displays installation properties of a plugin.
+
+EXAMPLES
+  $ hom plugins inspect myplugin
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/inspect.ts)_
+
+## `hom plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
+```
+USAGE
+  $ hom plugins install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -s, --silent   Silences yarn output.
+  -v, --verbose  Show verbose yarn output.
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+
+ALIASES
+  $ hom plugins add
+
+EXAMPLES
+  $ hom plugins install myplugin 
+
+  $ hom plugins install https://github.com/someuser/someplugin
+
+  $ hom plugins install someuser/someplugin
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/install.ts)_
+
+## `hom plugins:link PLUGIN`
+
+Links a plugin into the CLI for development.
+
+```
+USAGE
+  $ hom plugins link PLUGIN
+
+ARGUMENTS
+  PATH  [default: .] path to plugin
+
+FLAGS
+  -h, --help          Show CLI help.
+  -v, --verbose
+      --[no-]install  Install dependencies after linking the plugin.
+
 DESCRIPTION
   Links a plugin into the CLI for development.
-
   Installation of a linked plugin will override a user-installed or core plugin.
 
   e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
   command will override the user-installed or core plugin implementation. This is useful for development work.
 
+
 EXAMPLES
-  $ oex plugins:link myplugin
+  $ hom plugins link myplugin
 ```
 
-## `oex plugins:uninstall PLUGIN...`
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/link.ts)_
+
+## `hom plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ oex plugins:uninstall PLUGIN...
+  $ hom plugins remove plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -223,17 +445,85 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ oex plugins unlink
-  $ oex plugins remove
+  $ hom plugins unlink
+  $ hom plugins remove
+
+EXAMPLES
+  $ hom plugins remove myplugin
 ```
 
-## `oex plugins update`
+## `hom plugins reset`
+
+Remove all user-installed and linked plugins.
+
+```
+USAGE
+  $ hom plugins reset
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/reset.ts)_
+
+## `hom plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ hom plugins uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ hom plugins unlink
+  $ hom plugins remove
+
+EXAMPLES
+  $ hom plugins uninstall myplugin
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/uninstall.ts)_
+
+## `hom plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ hom plugins unlink plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ hom plugins unlink
+  $ hom plugins remove
+
+EXAMPLES
+  $ hom plugins unlink myplugin
+```
+
+## `hom plugins update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ oex plugins update [-h] [-v]
+  $ hom plugins update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
@@ -242,4 +532,76 @@ FLAGS
 DESCRIPTION
   Update installed plugins.
 ```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/update.ts)_
+
+## `hom run [NAME]`
+
+runs one of your saved scripts
+
+```
+USAGE
+  $ hom run [NAME] [-n <value>]
+
+ARGUMENTS
+  NAME  script to run
+
+FLAGS
+  -n, --namespace=<value>  [default: user] namespace directory to use
+
+DESCRIPTION
+  runs one of your saved scripts
+
+EXAMPLES
+  $ hom run -n=mycompany
+```
+
+_See code: [dist/commands/run.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/run.ts)_
+
+## `hom script [NAME]`
+
+creates a script that will not be run until you call it
+
+```
+USAGE
+  $ hom script [NAME] [-n <value>] [-c <value>] [-d <value>]
+
+ARGUMENTS
+  NAME  filename to edit
+
+FLAGS
+  -c, --content=<value>      content of the script. Skips opening the editor when given
+  -d, --description=<value>  A description of what your script does
+  -n, --namespace=<value>    [default: user] namespace directory to use
+
+DESCRIPTION
+  creates a script that will not be run until you call it
+
+EXAMPLES
+  $ hom script -n=mycompany
+```
+
+_See code: [dist/commands/script.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/script.ts)_
+
+## `hom set`
+
+sets default hom configurations
+
+```
+USAGE
+  $ hom set [-r <value>] [-n <value>] [-s <value>]
+
+FLAGS
+  -n, --namespace=<value>  default namespace
+  -r, --repo=<value>       a git repository to use as a template
+  -s, --shell=<value>      shell type
+
+DESCRIPTION
+  sets default hom configurations
+
+EXAMPLES
+  $ hom set -n=mycompany
+```
+
+_See code: [dist/commands/set.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/set.ts)_
 <!-- commandsstop -->
