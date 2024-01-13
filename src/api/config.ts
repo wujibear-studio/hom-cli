@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import { setupFilePath } from '../utils/files.js'
+import { HOM_DIR, setupFilePath } from '../utils/files.js'
 
 interface Setting {
   defaultNamespace?: string;
@@ -15,7 +15,7 @@ export class Config {
   }
 
   constructor () {
-    this.configPath = setupFilePath('settings.json')
+    this.configPath = setupFilePath(`${HOM_DIR}/settings.json`)
 
     if (fs.existsSync(this.configPath)) {
       try {

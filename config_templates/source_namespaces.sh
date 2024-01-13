@@ -7,7 +7,6 @@ function source_namespaces() {
 
   for namespace in $namespaces
   do
-    echo "found $namespace"
     [[ $namespace =~ [a-zA-Z0-9]* ]]
     stripped_name="${BASH_REMATCH[1]}"
 
