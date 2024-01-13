@@ -1,6 +1,6 @@
 {
   "author": "wujibear @wujibear",
-  "bin": "./bin/run.js",
+  "bin": "bin/run.js",
   "dependencies": {
     "@inquirer/prompts": "^3.3.0",
     "@oclif/core": "^3",
@@ -8,7 +8,7 @@
     "@oclif/plugin-plugins": "^4",
     "liquidjs": "^10.10.0"
   },
-  "description": "HOM, the CLI shell manager",
+  "description": "HöM, the CLI for shell management",
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^3",
@@ -36,8 +36,8 @@
   ],
   "homepage": "https://github.com/wujibear/hom",
   "license": "MIT",
-  "main": "",
-  "name": "hom",
+  "main": "bin/run.js",
+  "name": "hom-cli",
   "oclif": {
     "bin": "hom",
     "dirname": "hom",
@@ -45,8 +45,7 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
-      "@oclif/plugin-not-found",
-      "@oclif/plugin-autocomplete"
+      "@oclif/plugin-not-found"
     ],
     "jitPlugins": {},
     "topicSeparator": " ",
@@ -56,7 +55,10 @@
       }
     }
   },
-  "repository": "wujibear/hom",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wujibear/hom.git"
+  },
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
@@ -68,7 +70,9 @@
     "version": "oclif readme && git add README.md"
   },
   "version": "0.0.0",
-  "bugs": "https://github.com/wujibear/hom/issues",
+  "bugs": {
+    "url": "https://github.com/wujibear/hom/issues"
+  },
   "keywords": [
     "oclif"
   ],
@@ -78,5 +82,8 @@
   "volta": {
     "node": "20.10.0",
     "yarn": "3.7.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

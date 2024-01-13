@@ -4408,7 +4408,7 @@ __metadata:
     ts-node: ^10.9.2
     typescript: ^5
   bin:
-    hom: ./bin/run.js
+    hom: bin/run.js
   languageName: unknown
   linkType: soft
 
