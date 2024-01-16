@@ -1,11 +1,15 @@
 {
   "author": "wujibear @wujibear",
-  "bin": "bin/run.js",
+  "bin": {
+    "hom": "bin/run.js"
+  },
   "dependencies": {
     "@inquirer/prompts": "^3.3.0",
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
+    "@oclif/plugin-not-found": "^3.0.9",
     "@oclif/plugin-plugins": "^4",
+    "@oclif/plugin-version": "^2.0.11",
     "liquidjs": "^10.10.0"
   },
   "description": "HöM, the CLI for shell management",
@@ -44,6 +48,7 @@
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
+      "@oclif/plugin-version",
       "@oclif/plugin-plugins",
       "@oclif/plugin-not-found"
     ],

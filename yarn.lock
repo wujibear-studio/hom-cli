@@ -800,6 +800,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oclif/core@npm:^3.18.1":
+  version: 3.18.1
+  resolution: "@oclif/core@npm:3.18.1"
+  dependencies:
+    "@types/cli-progress": ^3.11.5
+    ansi-escapes: ^4.3.2
+    ansi-styles: ^4.3.0
+    cardinal: ^2.1.1
+    chalk: ^4.1.2
+    clean-stack: ^3.0.1
+    cli-progress: ^3.12.0
+    color: ^4.2.3
+    debug: ^4.3.4
+    ejs: ^3.1.9
+    get-package-type: ^0.1.0
+    globby: ^11.1.0
+    hyperlinker: ^1.0.0
+    indent-string: ^4.0.0
+    is-wsl: ^2.2.0
+    js-yaml: ^3.14.1
+    natural-orderby: ^2.0.3
+    object-treeify: ^1.1.33
+    password-prompt: ^1.1.3
+    slice-ansi: ^4.0.0
+    string-width: ^4.2.3
+    strip-ansi: ^6.0.1
+    supports-color: ^8.1.1
+    supports-hyperlinks: ^2.2.0
+    widest-line: ^3.1.0
+    wordwrap: ^1.0.0
+    wrap-ansi: ^7.0.0
+  checksum: 6105cad54c03d38be8a769063db81dc13922088912e55606f9172671b7860d3137e640c823582fd9b6dc6a21561e1f469c66e26fb460e220bdb6f100c265d2e2
+  languageName: node
+  linkType: hard
+
 "@oclif/plugin-help@npm:^5":
   version: 5.2.20
   resolution: "@oclif/plugin-help@npm:5.2.20"
@@ -829,6 +864,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oclif/plugin-not-found@npm:^3.0.9":
+  version: 3.0.9
+  resolution: "@oclif/plugin-not-found@npm:3.0.9"
+  dependencies:
+    "@oclif/core": ^3.18.1
+    chalk: ^5.3.0
+    fast-levenshtein: ^3.0.0
+  checksum: 25388293e0246ff69d38f822c602f277e82fa6660657c153c3133cb9de46a78c885332329edbaddd685e94f5ac385ea2cea4cc740d9b7e71db89bf3a26563233
+  languageName: node
+  linkType: hard
+
 "@oclif/plugin-plugins@npm:^4":
   version: 4.1.14
   resolution: "@oclif/plugin-plugins@npm:4.1.14"
@@ -843,6 +889,15 @@ __metadata:
     validate-npm-package-name: ^5.0.0
     yarn: ^1.22.21
   checksum: ef7a367aa38d27dd9086c753e984dfdd5533ba67396e6673d4a33923673a4d91eed9a17384dc19dbe9f7c60a3995bef6fbb380a323890a9dffdf2721c0300c95
+  languageName: node
+  linkType: hard
+
+"@oclif/plugin-version@npm:^2.0.11":
+  version: 2.0.11
+  resolution: "@oclif/plugin-version@npm:2.0.11"
+  dependencies:
+    "@oclif/core": ^3.15.1
+  checksum: d37371ef24c1490b95dd1165f88054d4dbbf296073c73a9c4b4358249254b8dbf427772f249ea35fdc23c6c0c481a8c97e10623b156ff9effc87b9b463798487
   languageName: node
   linkType: hard
 
@@ -1215,6 +1270,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: d4401622333e888925b47c5d5bb0b89dddae17cc020f909a64ad7275b326bf3c6e9cd467f625a197fd958a1e49220d32f4a2b0bf2948fee330c719a9b985674e
+  languageName: node
+  linkType: hard
+
+"@types/cli-progress@npm:^3.11.5":
+  version: 3.11.5
+  resolution: "@types/cli-progress@npm:3.11.5"
+  dependencies:
+    "@types/node": "*"
+  checksum: 571fb3b11646415ac49c90e8003b82f3ac58d75fde5952caf40b4a079517b6e25e79ab0a7455d0ab0398d0b2de062646dba075d3d1f8d147eed2ab4d41abbf64
   languageName: node
   linkType: hard
 
@@ -4390,7 +4454,9 @@ __metadata:
     "@inquirer/prompts": ^3.3.0
     "@oclif/core": ^3
     "@oclif/plugin-help": ^5
+    "@oclif/plugin-not-found": ^3.0.9
     "@oclif/plugin-plugins": ^4
+    "@oclif/plugin-version": ^2.0.11
     "@oclif/prettier-config": ^0.2.1
     "@oclif/test": ^3
     "@types/chai": ^4
@@ -4408,7 +4474,7 @@ __metadata:
     ts-node: ^10.9.2
     typescript: ^5
   bin:
-    hom-cli: bin/run.js
+    hom: bin/run.js
   languageName: unknown
   linkType: soft
 
