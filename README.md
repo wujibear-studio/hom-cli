@@ -49,6 +49,7 @@ USAGE
 * [`hom run [NAME]`](#hom-run-name)
 * [`hom script [NAME]`](#hom-script-name)
 * [`hom set`](#hom-set)
+* [`hom version`](#hom-version)
 
 ## `hom alias NAME CONTENT`
 
@@ -604,4 +605,24 @@ EXAMPLES
 ```
 
 _See code: [dist/commands/set.ts](https://github.com/wujibear/hom/blob/v0.0.0/dist/commands/set.ts)_
+
+## `hom version`
+
+```
+USAGE
+  $ hom version [--json] [--verbose]
+
+FLAGS
+  --verbose  Show additional information about the CLI.
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+FLAG DESCRIPTIONS
+      --verbose  Show additional information about the CLI.
+
+    Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
+```
+
+_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.0.11/lib/commands/version.ts)_
 <!-- commandsstop -->
