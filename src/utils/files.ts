@@ -13,13 +13,20 @@ export const ShellFileTypes = {
 
 export const FileTypeKeys = Object.keys(ShellFileTypes)
 
-export const HOM_DIR = path.join(os.homedir(), '.hom')
-export const CORE_DIR = path.join(HOM_DIR, '.core')
-const GITIGNORE_PATH = path.join(HOM_DIR, '.gitignore')
-const SOURCE_LINE = `source ${CORE_DIR}/init.sh`
+export function dirPaths() {
+  const homDir = '.hom'
+  return {
+    HOM_DIR: path.join(os.homedir(), homDir),
+    CORE_DIR: path.join(os.homedir(), homDir, '.core'),
+    GITIGNORE_PATH: path.join(os.homedir(), homDir, '.gitignore'),
+  }
+}
+export function sourceLine() { 
+  return `source ${dirPaths().CORE_DIR}/init.sh`
+}
 
 export function namespaceDir(namespace: string): string {
-  return path.join(HOM_DIR, namespace)
+  return path.join(dirPaths().HOM_DIR, namespace)
 }
 
 export interface PathDetails {
@@ -29,7 +36,7 @@ export interface PathDetails {
 }
 
 export function closestPath({namespace, type, name}: PathDetails): string {
-  const crumb = [HOM_DIR]
+  const crumb = [dirPaths().HOM_DIR]
   namespace && crumb.push(namespace)
   namespace && type && crumb.push(type)
   namespace && type && name && crumb.push(`${name}.sh`)
@@ -45,11 +52,11 @@ export function setupFilePath(filePath: string) {
 }
 
 export function listNamespaces(): string[] | void {
-  if (!fs.existsSync(HOM_DIR)) return console.log('Installation directory missing')
-  const files = fs.readdirSync(HOM_DIR)
+  if (!fs.existsSync(dirPaths().HOM_DIR)) return console.log('Installation directory missing')
+  const files = fs.readdirSync(dirPaths().HOM_DIR)
 
   return files.reduce((acc: string[], file) => {
-    const filePath = path.join(HOM_DIR, file)
+    const filePath = path.join(dirPaths().HOM_DIR, file)
     const isDir = fs.lstatSync(filePath).isDirectory()
     if (isDir && !file.match(/^\./)) acc.push(file)
 
@@ -61,10 +68,10 @@ export function listFiles() {
 } 
 
 export async function setupShellSourceFiles() {
-  fs.mkdirSync(CORE_DIR, {recursive: true})
-  if (!fs.existsSync(GITIGNORE_PATH)) fs.cpSync(`${process.cwd()}/config_templates/gitignore`, GITIGNORE_PATH)
+  fs.mkdirSync(dirPaths().CORE_DIR, {recursive: true})
+  if (!fs.existsSync(dirPaths().GITIGNORE_PATH)) fs.cpSync(`${process.cwd()}/config_templates/gitignore`, dirPaths().GITIGNORE_PATH)
 
-  fs.cpSync(`${process.cwd()}/config_templates`, CORE_DIR, {recursive: true, force: true})
+  fs.cpSync(`${process.cwd()}/config_templates`, dirPaths().CORE_DIR, {recursive: true, force: true})
 }
 
 /*
@@ -85,8 +92,8 @@ export async function installShell() {
   }
 
   if (fs.existsSync(chosenProfile) && profileHasInit(chosenProfile)) return
-  if (!fs.existsSync(chosenProfile)) return fs.writeFileSync(chosenProfile, SOURCE_LINE)
-  fs.appendFileSync(chosenProfile, SOURCE_LINE)
+  if (!fs.existsSync(chosenProfile)) return fs.writeFileSync(chosenProfile, sourceLine())
+  fs.appendFileSync(chosenProfile, sourceLine())
 }
 
 function installedShellProfiles() {
@@ -103,5 +110,5 @@ function profileHasInit(file: string) {
 
   const data = fs.readFileSync(file)
 
-  return `${data}`.match(SOURCE_LINE)
+  return `${data}`.match(sourceLine())
 }
