@@ -44,7 +44,8 @@ export function setupFilePath(filePath: string) {
   return filePath
 }
 
-export function listNamespaces(): string[] {
+export function listNamespaces(): string[] | void {
+  if (!fs.existsSync(HOM_DIR)) return console.log('Installation directory missing')
   const files = fs.readdirSync(HOM_DIR)
 
   return files.reduce((acc: string[], file) => {
