@@ -1,5 +1,6 @@
 import {Args, Command, Flags} from '@oclif/core'
-import { closestPath, FileTypeKeys, listNamespaces } from '../utils/files.js'
+import { closestPath, FileTypeKeys } from '../utils/files.js'
+import PrintAPI from '../api/print.js'
 
 export default class List extends Command {
   static aliases = ['ls']
@@ -23,7 +24,8 @@ export default class List extends Command {
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(List)
 
-    this.log('namespaces:', listNamespaces())
+    const print = new PrintAPI
+    print.printNamespaces()
 
   }
 }

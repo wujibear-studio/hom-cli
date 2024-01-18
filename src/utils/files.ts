@@ -51,22 +51,6 @@ export function setupFilePath(filePath: string) {
   return filePath
 }
 
-export function listNamespaces(): string[] | void {
-  if (!fs.existsSync(dirPaths().HOM_DIR)) return console.log('Installation directory missing')
-  const files = fs.readdirSync(dirPaths().HOM_DIR)
-
-  return files.reduce((acc: string[], file) => {
-    const filePath = path.join(dirPaths().HOM_DIR, file)
-    const isDir = fs.lstatSync(filePath).isDirectory()
-    if (isDir && !file.match(/^\./)) acc.push(file)
-
-    return acc
-  }, [])
-}
-
-export function listFiles() {
-} 
-
 export async function setupShellSourceFiles() {
   fs.mkdirSync(dirPaths().CORE_DIR, {recursive: true})
   if (!fs.existsSync(dirPaths().GITIGNORE_PATH)) fs.cpSync(`${process.cwd()}/config_templates/gitignore`, dirPaths().GITIGNORE_PATH)
