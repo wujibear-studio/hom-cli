@@ -56,18 +56,22 @@ function filesInNamespace(name: string): Namespace | null {
 
   folders.forEach(folder => {
     const dir = path.join(namespaceDir, folder)
-    children.set(folder, filesForShellType(dir))
+    const childFiles = filesForShellType(dir)
+    if (childFiles) children.set(folder, childFiles)
   })
 
   return {name: name, dir: namespaceDir, children: children, type: 'namespace'}
 } 
 
-function filesForShellType(typeDir: string): ShellFile[] {
-  if (!fs.existsSync(typeDir)) return []
+function filesForShellType(typeDir: string): ShellFile[] | null {
+  if (!fs.existsSync(typeDir)) return null
 
   const files = fs.readdirSync(typeDir)
 
-  return files.reduce((acc: any, file: string) => [acc, fileData(file, typeDir)], []) 
+  return files.reduce((acc: any, file: string) => {
+    const data = fileData(file, typeDir)
+    return data ? [...acc, data] : acc
+  }, []) 
 }
 
 function fileData(name: string, typeDir: string): ShellFile | null {

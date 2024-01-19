@@ -1769,6 +1769,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ansi@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "ansi@npm:0.3.1"
+  checksum: 63c8fe8870908a26e7e64c8aa73ae9bea7ff3d84f10f043904d337b0868f086bff688d60ba6ad6294fe6aeb54a7b82c7536a60b470df1b8a0ee80193e194c065
+  languageName: node
+  linkType: hard
+
 "ansicolors@npm:~0.3.2":
   version: 0.3.2
   resolution: "ansicolors@npm:0.3.2"
@@ -2349,6 +2356,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "chalk@npm:3.0.0"
+  dependencies:
+    ansi-styles: ^4.1.0
+    supports-color: ^7.1.0
+  checksum: 8e3ddf3981c4da405ddbd7d9c8d91944ddf6e33d6837756979f7840a29272a69a5189ecae0ff84006750d6d1e92368d413335eab4db5476db6e6703a1d1e0505
+  languageName: node
+  linkType: hard
+
 "chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
@@ -2538,7 +2555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-table@npm:^0.3.1":
+"cli-table@npm:^0.3.1, cli-table@npm:^0.3.11":
   version: 0.3.11
   resolution: "cli-table@npm:0.3.11"
   dependencies:
@@ -3784,6 +3801,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"figlet@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "figlet@npm:1.7.0"
+  bin:
+    figlet: bin/index.js
+  checksum: 3f61c2aeb13e48185a1b23598c005a6cd42cffcb01dd1ed0da80d692e14af5bfef774b99df6a840a6e4daa985b35d5ca0f085c471309bcdd6c06d6be58434ccf
+  languageName: node
+  linkType: hard
+
 "figures@npm:^3.0.0, figures@npm:^3.2.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
@@ -4463,11 +4489,14 @@ __metadata:
     "@types/mocha": ^10
     "@types/node": ^18
     chai: ^4
+    cli-table: ^0.3.11
     eslint: ^8
     eslint-config-oclif: ^5
     eslint-config-oclif-typescript: ^3
     eslint-config-prettier: ^9.1.0
+    figlet: ^1.7.0
     liquidjs: ^10.10.0
+    lolcatjs: ^2.4.3
     mocha: ^10
     oclif: ^4.1.3
     shx: ^0.3.4
@@ -5567,6 +5596,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"line-by-line@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "line-by-line@npm:0.1.6"
+  checksum: fc1647c6eee2ca312d62ae647cf57afe325a4a31739cf35400aec2461bf4ab4d01914cbe0f7c31ce76b91950028fec2402467e4e43bdb797afdba8b087c5e938
+  languageName: node
+  linkType: hard
+
 "lines-and-columns@npm:^1.1.6":
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
@@ -5670,6 +5706,25 @@ __metadata:
     chalk: ^4.1.0
     is-unicode-supported: ^0.1.0
   checksum: fce1497b3135a0198803f9f07464165e9eb83ed02ceb2273930a6f8a508951178d8cf4f0378e9d28300a2ed2bc49050995d2bd5f53ab716bb15ac84d58c6ef74
+  languageName: node
+  linkType: hard
+
+"lolcatjs@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "lolcatjs@npm:2.4.3"
+  dependencies:
+    ansi: ^0.3.1
+    chalk: ^3.0.0
+    line-by-line: ^0.1.6
+    minimist: ^1.2.0
+    sleep: ^6.3.0
+    supports-color: ^7.1.0
+  dependenciesMeta:
+    sleep:
+      optional: true
+  bin:
+    lolcatjs: cli.js
+  checksum: 620340c7148f7d25517cff4398b2d3c4c78d8e43baf9ecfa6a259ab6b4d48eb8e973b47bdf934882de6c40894f514da20e02f43cc662408ddeb5392d1c4900f9
   languageName: node
   linkType: hard
 
@@ -6215,6 +6270,15 @@ __metadata:
   version: 1.0.0
   resolution: "mute-stream@npm:1.0.0"
   checksum: 36fc968b0e9c9c63029d4f9dc63911950a3bdf55c9a87f58d3a266289b67180201cade911e7699f8b2fa596b34c9db43dad37649e3f7fdd13c3bb9edb0017ee7
+  languageName: node
+  linkType: hard
+
+"nan@npm:^2.14.1":
+  version: 2.18.0
+  resolution: "nan@npm:2.18.0"
+  dependencies:
+    node-gyp: latest
+  checksum: 4fe42f58456504eab3105c04a5cffb72066b5f22bd45decf33523cb17e7d6abc33cca2a19829407b9000539c5cb25f410312d4dc5b30220167a3594896ea6a0a
   languageName: node
   linkType: hard
 
@@ -8060,6 +8124,16 @@ __metadata:
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
   checksum: 94a93fff615f25a999ad4b83c9d5e257a7280c90a32a7cb8b4a87996e4babf322e469c42b7f649fd5796edd8687652f3fb452a86dc97a816f01113183393f11c
+  languageName: node
+  linkType: hard
+
+"sleep@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "sleep@npm:6.3.0"
+  dependencies:
+    nan: ^2.14.1
+    node-gyp: latest
+  checksum: ac40893a581176512233ac6637f861116095775edce8d75d16e9513e708507dcf68c3d02c6cf3cbe4414a1c7bcb48dffa4f7d59b55f4087c4c349efdb2def736
   languageName: node
   linkType: hard
 

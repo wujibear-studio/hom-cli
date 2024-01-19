@@ -10,9 +10,12 @@
     "@oclif/plugin-not-found": "^3.0.9",
     "@oclif/plugin-plugins": "^4",
     "@oclif/plugin-version": "^2.0.11",
-    "liquidjs": "^10.10.0"
+    "cli-table": "^0.3.11",
+    "figlet": "^1.7.0",
+    "liquidjs": "^10.10.0",
+    "lolcatjs": "^2.4.3"
   },
-  "description": "HöM, the CLI for shell management",
+  "description": "HöM, the shell management CLI",
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^3",
