@@ -28,6 +28,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`hom alias NAME CONTENT`](#hom-alias-name-content)
+* [`hom debug`](#hom-debug)
 * [`hom edit [NAME]`](#hom-edit-name)
 * [`hom export NAME CONTENT`](#hom-export-name-content)
 * [`hom function [NAME]`](#hom-function-name)
@@ -75,6 +76,23 @@ EXAMPLES
 ```
 
 _See code: [dist/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/alias.ts)_
+
+## `hom debug`
+
+temporary debugging helper
+
+```
+USAGE
+  $ hom debug
+
+DESCRIPTION
+  temporary debugging helper
+
+EXAMPLES
+  $ hom debug
+```
+
+_See code: [dist/commands/debug.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/debug.ts)_
 
 ## `hom edit [NAME]`
 
@@ -657,7 +675,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 FLAG DESCRIPTIONS
-      --verbose  Show additional information about the CLI.
+  --verbose  Show additional information about the CLI.
 
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```

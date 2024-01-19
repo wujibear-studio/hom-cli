@@ -2,7 +2,9 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 import { selectShellType } from '../api/prompts.js'
+import FileAPI from '../api/files.js'
 const __dirname = path.dirname(process.argv[1])
+import { initContent, sourceDirContent, sourceNamespacesContent, gitignoreContent } from './templates.js'
 
 export const ShellFileTypes = {
   alias: 'aliases',
@@ -53,12 +55,18 @@ export function setupFilePath(filePath: string) {
 }
 
 export async function setupShellSourceFiles() {
-  fs.mkdirSync(dirPaths().CORE_DIR, {recursive: true})
-  const configSource = path.join(__dirname, 'config_templates')
-  const gitignoreSource = path.join(configSource, 'gitignore')
-  if (!fs.existsSync(dirPaths().GITIGNORE_PATH)) fs.cpSync(gitignoreSource, dirPaths().GITIGNORE_PATH)
+  const {GITIGNORE_PATH, CORE_DIR} = dirPaths()
+  fs.mkdirSync(CORE_DIR, {recursive: true})
+  if (!fs.existsSync(GITIGNORE_PATH)) new FileAPI(GITIGNORE_PATH).write(gitignoreContent)
 
-  fs.cpSync(configSource, dirPaths().CORE_DIR, {recursive: true, force: true})
+  createConfigFile('init.sh', initContent)
+  createConfigFile('source_dir.sh', sourceDirContent)
+  createConfigFile('source_namespaces.sh', sourceNamespacesContent)
+}
+
+async function createConfigFile(fileName: string, content: string) {
+  const {HOM_DIR} = dirPaths()
+  new FileAPI(path.join(HOM_DIR, fileName)).write(content)
 }
 
 /*
