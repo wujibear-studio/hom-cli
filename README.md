@@ -18,7 +18,7 @@ $ npm install -g hom-cli
 $ hom COMMAND
 running command...
 $ hom (--version)
-hom-cli/0.0.6 darwin-x64 node-v20.10.0
+hom-cli/0.0.7 darwin-x64 node-v20.10.0
 $ hom --help [COMMAND]
 USAGE
   $ hom COMMAND
@@ -75,7 +75,7 @@ EXAMPLES
   $ hom alias alias_name "some kind of content"
 ```
 
-_See code: [dist/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/alias.ts)_
+_See code: [dist/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/alias.ts)_
 
 ## `hom debug`
 
@@ -92,7 +92,7 @@ EXAMPLES
   $ hom debug
 ```
 
-_See code: [dist/commands/debug.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/debug.ts)_
+_See code: [dist/commands/debug.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/debug.ts)_
 
 ## `hom edit [NAME]`
 
@@ -117,7 +117,7 @@ EXAMPLES
   $ hom edit -n=mycompany
 ```
 
-_See code: [dist/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/edit.ts)_
+_See code: [dist/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/edit.ts)_
 
 ## `hom export NAME CONTENT`
 
@@ -141,7 +141,7 @@ EXAMPLES
   $ hom export export_name "some kind of content"
 ```
 
-_See code: [dist/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/export.ts)_
+_See code: [dist/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/export.ts)_
 
 ## `hom function [NAME]`
 
@@ -166,7 +166,7 @@ EXAMPLES
   $ hom function -n=mycompany
 ```
 
-_See code: [dist/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/function.ts)_
+_See code: [dist/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/function.ts)_
 
 ## `hom help [COMMANDS]`
 
@@ -203,7 +203,7 @@ EXAMPLES
   $ hom install
 ```
 
-_See code: [dist/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/install.ts)_
+_See code: [dist/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/install.ts)_
 
 ## `hom list [NAME]`
 
@@ -229,7 +229,7 @@ EXAMPLES
   $ hom list -n=mycompany
 ```
 
-_See code: [dist/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/list.ts)_
+_See code: [dist/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/list.ts)_
 
 ## `hom ls [NAME]`
 
@@ -278,7 +278,7 @@ EXAMPLES
   $ hom partial -n=mycompany
 ```
 
-_See code: [dist/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/partial.ts)_
+_See code: [dist/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/partial.ts)_
 
 ## `hom plugins`
 
@@ -576,7 +576,7 @@ EXAMPLES
   $ hom run -n=mycompany
 ```
 
-_See code: [dist/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/run.ts)_
+_See code: [dist/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/run.ts)_
 
 ## `hom script [NAME]`
 
@@ -601,7 +601,7 @@ EXAMPLES
   $ hom script -n=mycompany
 ```
 
-_See code: [dist/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/script.ts)_
+_See code: [dist/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/script.ts)_
 
 ## `hom set`
 
@@ -623,7 +623,7 @@ EXAMPLES
   $ hom set -n=mycompany
 ```
 
-_See code: [dist/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.6/dist/commands/set.ts)_
+_See code: [dist/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.7/dist/commands/set.ts)_
 
 ## `hom update [CHANNEL]`
 
@@ -675,7 +675,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 FLAG DESCRIPTIONS
-  --verbose  Show additional information about the CLI.
+      --verbose  Show additional information about the CLI.
 
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```
