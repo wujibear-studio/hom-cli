@@ -18,7 +18,7 @@ $ npm install -g hom-cli
 $ hom COMMAND
 running command...
 $ hom (--version)
-hom-cli/0.0.4 darwin-arm64 node-v21.6.0
+hom-cli/0.0.4 darwin-x64 node-v20.10.0
 $ hom --help [COMMAND]
 USAGE
   $ hom COMMAND
@@ -74,7 +74,7 @@ EXAMPLES
   $ hom alias alias_name "some kind of content"
 ```
 
-_See code: [src/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/alias.ts)_
+_See code: [dist/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/alias.ts)_
 
 ## `hom edit [NAME]`
 
@@ -99,7 +99,7 @@ EXAMPLES
   $ hom edit -n=mycompany
 ```
 
-_See code: [src/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/edit.ts)_
+_See code: [dist/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/edit.ts)_
 
 ## `hom export NAME CONTENT`
 
@@ -123,7 +123,7 @@ EXAMPLES
   $ hom export export_name "some kind of content"
 ```
 
-_See code: [src/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/export.ts)_
+_See code: [dist/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/export.ts)_
 
 ## `hom function [NAME]`
 
@@ -148,7 +148,7 @@ EXAMPLES
   $ hom function -n=mycompany
 ```
 
-_See code: [src/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/function.ts)_
+_See code: [dist/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/function.ts)_
 
 ## `hom help [COMMANDS]`
 
@@ -168,7 +168,7 @@ DESCRIPTION
   Display help for hom.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/lib/commands/help.ts)_
 
 ## `hom install`
 
@@ -185,7 +185,7 @@ EXAMPLES
   $ hom install
 ```
 
-_See code: [src/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/install.ts)_
+_See code: [dist/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/install.ts)_
 
 ## `hom list [NAME]`
 
@@ -211,7 +211,7 @@ EXAMPLES
   $ hom list -n=mycompany
 ```
 
-_See code: [src/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/list.ts)_
+_See code: [dist/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/list.ts)_
 
 ## `hom ls [NAME]`
 
@@ -260,7 +260,7 @@ EXAMPLES
   $ hom partial -n=mycompany
 ```
 
-_See code: [src/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/partial.ts)_
+_See code: [dist/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/partial.ts)_
 
 ## `hom plugins`
 
@@ -283,7 +283,7 @@ EXAMPLES
   $ hom plugins
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/index.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/index.ts)_
 
 ## `hom plugins:install PLUGIN...`
 
@@ -352,7 +352,7 @@ EXAMPLES
   $ hom plugins inspect myplugin
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/inspect.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/inspect.ts)_
 
 ## `hom plugins:install PLUGIN...`
 
@@ -396,7 +396,7 @@ EXAMPLES
   $ hom plugins install someuser/someplugin
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/install.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/install.ts)_
 
 ## `hom plugins:link PLUGIN`
 
@@ -426,7 +426,7 @@ EXAMPLES
   $ hom plugins link myplugin
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/link.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/link.ts)_
 
 ## `hom plugins:uninstall PLUGIN...`
 
@@ -463,7 +463,7 @@ USAGE
   $ hom plugins reset
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/reset.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/reset.ts)_
 
 ## `hom plugins:uninstall PLUGIN...`
 
@@ -491,7 +491,7 @@ EXAMPLES
   $ hom plugins uninstall myplugin
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/uninstall.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/uninstall.ts)_
 
 ## `hom plugins:uninstall PLUGIN...`
 
@@ -535,7 +535,7 @@ DESCRIPTION
   Update installed plugins.
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/update.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.14/lib/commands/plugins/update.ts)_
 
 ## `hom run [NAME]`
 
@@ -558,7 +558,7 @@ EXAMPLES
   $ hom run -n=mycompany
 ```
 
-_See code: [src/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/run.ts)_
+_See code: [dist/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/run.ts)_
 
 ## `hom script [NAME]`
 
@@ -583,7 +583,7 @@ EXAMPLES
   $ hom script -n=mycompany
 ```
 
-_See code: [src/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/script.ts)_
+_See code: [dist/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/script.ts)_
 
 ## `hom set`
 
@@ -605,7 +605,7 @@ EXAMPLES
   $ hom set -n=mycompany
 ```
 
-_See code: [src/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/src/commands/set.ts)_
+_See code: [dist/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.4/dist/commands/set.ts)_
 
 ## `hom update [CHANNEL]`
 
@@ -642,7 +642,7 @@ EXAMPLES
     $ hom update --available
 ```
 
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v4.1.8/src/commands/update.ts)_
+_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v4.1.8/dist/commands/update.ts)_
 
 ## `hom version`
 
@@ -662,5 +662,5 @@ FLAG DESCRIPTIONS
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```
 
-_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.0.11/src/commands/version.ts)_
+_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.0.11/lib/commands/version.ts)_
 <!-- commandsstop -->

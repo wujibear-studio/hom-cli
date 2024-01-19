@@ -26,6 +26,5 @@ export default class List extends Command {
 
     const print = new PrintAPI
     print.printNamespaces()
-
   }
 }

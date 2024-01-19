@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 import { selectShellType } from '../api/prompts.js'
+const __dirname = path.join(path.dirname(process.argv[1]), '..')
 
 export const ShellFileTypes = {
   alias: 'aliases',
@@ -53,7 +54,7 @@ export function setupFilePath(filePath: string) {
 
 export async function setupShellSourceFiles() {
   fs.mkdirSync(dirPaths().CORE_DIR, {recursive: true})
-  const configSource = path.join(process.cwd(), 'config_templates')
+  const configSource = path.join(__dirname, 'config_templates')
   const gitignoreSource = path.join(configSource, 'gitignore')
   if (!fs.existsSync(dirPaths().GITIGNORE_PATH)) fs.cpSync(gitignoreSource, dirPaths().GITIGNORE_PATH)
 
