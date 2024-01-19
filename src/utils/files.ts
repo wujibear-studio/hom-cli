@@ -41,7 +41,7 @@ export function closestPath({namespace, type, name}: PathDetails): string {
   namespace && type && crumb.push(type)
   namespace && type && name && crumb.push(`${name}.sh`)
 
-  return crumb.join('/')
+  return path.join(...crumb)
 }
 
 export function setupFilePath(filePath: string) {
@@ -53,9 +53,11 @@ export function setupFilePath(filePath: string) {
 
 export async function setupShellSourceFiles() {
   fs.mkdirSync(dirPaths().CORE_DIR, {recursive: true})
-  if (!fs.existsSync(dirPaths().GITIGNORE_PATH)) fs.cpSync(`${process.cwd()}/config_templates/gitignore`, dirPaths().GITIGNORE_PATH)
+  const configSource = path.join(process.cwd(), 'config_templates')
+  const gitignoreSource = path.join(configSource, 'gitignore')
+  if (!fs.existsSync(dirPaths().GITIGNORE_PATH)) fs.cpSync(gitignoreSource, dirPaths().GITIGNORE_PATH)
 
-  fs.cpSync(`${process.cwd()}/config_templates`, dirPaths().CORE_DIR, {recursive: true, force: true})
+  fs.cpSync(configSource, dirPaths().CORE_DIR, {recursive: true, force: true})
 }
 
 /*
