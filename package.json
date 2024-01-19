@@ -80,7 +80,7 @@
     "pack:this": "oclif pack",
     "version": "oclif readme && git add README.md"
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
   "bugs": {
     "url": "https://github.com/wujibear-studio/hom-cli/issues"
   },
