@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 import { selectShellType } from '../api/prompts.js'
-const __dirname = path.join(path.dirname(process.argv[1]), '..')
+const __dirname = path.dirname(process.argv[1])
 
 export const ShellFileTypes = {
   alias: 'aliases',
