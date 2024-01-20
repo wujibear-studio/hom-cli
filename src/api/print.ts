@@ -21,15 +21,17 @@ export default class PrintAPI {
 
   async printNamespaces () {
     const namespaceData: any = listNamespaces()
-    namespaceData.forEach((values: any, name: string) => {
-      this._printFileTypes(values, name)
-    })
+    for (const [values, name] of namespaceData) {
+      await this._printFileTypes(values, name)
+    }
   }
   
-  async _printFileTypes(values: any, name: string) {
+  async _printFileTypes(name: string, values: any) {
     const {children} = values
     await this.printHeadline(name, this.headlineOptions)
-    children.forEach((files: any, fileType: any) => this._printChildren(files, fileType))
+    for (const [fileType, files] of children) {
+      await this._printChildren(files, fileType)
+    }
   }
   
   async _printChildren(files: any, fileType: string) {

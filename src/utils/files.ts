@@ -14,7 +14,7 @@ export const ShellFileTypes = {
   script: 'scripts',
 }
 
-export const FileTypeKeys = Object.keys(ShellFileTypes)
+export const FileTypeKeys: string[] = Object.keys(ShellFileTypes)
 
 export function dirPaths() {
   const homDir = '.hom'
@@ -41,7 +41,8 @@ export interface PathDetails {
 export function closestPath({namespace, type, name}: PathDetails): string {
   const crumb = [dirPaths().HOM_DIR]
   namespace && crumb.push(namespace)
-  namespace && type && crumb.push(type)
+  // @ts-ignore
+  namespace && type && crumb.push(ShellFileTypes[type])
   namespace && type && name && crumb.push(`${name}.sh`)
 
   return path.join(...crumb)
