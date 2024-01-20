@@ -7,7 +7,7 @@ import FileAPI from '../api/files.js'
 import { template } from '../api/templates.js'
 
 export default class Export extends NamespacedCommand {
-  static description = 'creates a command line export'
+  static description = 'creates an export for your shell'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> export_name "some kind of content"',

@@ -5,7 +5,7 @@ import * as fs from 'fs'
 
 export default class Move extends NamespacedCommand {
   static aliases = ['mv']
-  static description = 'moves a file between namespaces'
+  static description = 'moves a <%= config.bin %> file between namespaces'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> FILE_NAME',

@@ -7,7 +7,7 @@ import FileAPI from '../api/files.js'
 import { template } from '../api/templates.js'
 
 export default class Alias extends NamespacedCommand {
-  static description = 'creates a command line alias'
+  static description = 'creates an alias for your shell'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> alias_name "some kind of content"',

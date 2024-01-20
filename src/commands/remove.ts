@@ -5,7 +5,7 @@ import * as fs from 'fs'
 
 export default class Remove extends NamespacedCommand {
   static aliases = ['rm']
-  static description = 'removes a file'
+  static description = 'removes a shell file'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> FILE_NAME',

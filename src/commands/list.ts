@@ -3,7 +3,7 @@ import PrintAPI from '../api/print.js'
 
 export default class List extends Command {
   static aliases = ['ls']
-  static description = 'sets default <%= config.bin %> configurations'
+  static description = 'lists the docs for shell files within <%= config.bin %>'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> -n=mycompany',

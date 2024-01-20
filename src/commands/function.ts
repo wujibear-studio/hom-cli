@@ -7,10 +7,10 @@ import FileAPI from '../api/files.js'
 import { template } from '../api/templates.js'
 
 export default class Edit extends NamespacedCommand {
-  static description = 'sets default <%= config.bin %> configurations'
+  static description = 'creates a shell function'
 
   static examples = [
-    '<%= config.bin %> <%= command.id %> -n=mycompany',
+    '<%= config.bin %> <%= command.id %> function_name -c "echo $something" -d "this is what it do"',
   ]
 
   static flags = {
@@ -25,7 +25,7 @@ export default class Edit extends NamespacedCommand {
   }
 
   static args = {
-    name: Args.string({description: 'filename to edit'}),
+    name: Args.string({description: 'filename to edit', required: true}),
   }
 
   public async run(): Promise<void> {

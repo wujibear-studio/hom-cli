@@ -7,7 +7,7 @@ import FileAPI from '../api/files.js'
 import { template } from '../api/templates.js'
 
 export default class Script extends NamespacedCommand {
-  static description = 'creates a script that will not be run until you call it'
+  static description = 'creates a shell script that will NOT be run until called'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> -n=mycompany',

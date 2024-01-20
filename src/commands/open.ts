@@ -3,7 +3,7 @@ import { Exec } from '../api/shell.js'
 import { closestPath, FileTypeKeys } from '../utils/files.js'
 
 export default class Edit extends Command {
-  static description = 'sets default <%= config.bin %> configurations'
+  static description = 'opens a shell namespace, or folder in your finder'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> -n=mycompany',

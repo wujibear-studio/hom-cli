@@ -7,7 +7,7 @@ import FileAPI from '../api/files.js'
 import { template } from '../api/templates.js'
 
 export default class Partial extends NamespacedCommand {
-  static description = 'creates a partial that will be loaded in your shell'
+  static description = 'creates a partial to better organize your shell'
 
   static examples = [
     '<%= config.bin %> <%= command.id %> -n=mycompany',
