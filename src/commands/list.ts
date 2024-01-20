@@ -1,5 +1,4 @@
 import {Args, Command, Flags} from '@oclif/core'
-import { closestPath, FileTypeKeys } from '../utils/files.js'
 import PrintAPI from '../api/print.js'
 
 export default class List extends Command {
