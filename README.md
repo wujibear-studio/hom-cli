@@ -18,7 +18,7 @@ $ npm install -g hom-cli
 $ hom COMMAND
 running command...
 $ hom (--version)
-hom-cli/0.0.9 darwin-x64 node-v20.10.0
+hom-cli/0.0.10 darwin-x64 node-v20.10.0
 $ hom --help [COMMAND]
 USAGE
   $ hom COMMAND
@@ -79,7 +79,7 @@ EXAMPLES
   $ hom alias alias_name "some kind of content"
 ```
 
-_See code: [src/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/alias.ts)_
+_See code: [src/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/alias.ts)_
 
 ## `hom edit [NAME]`
 
@@ -104,7 +104,7 @@ EXAMPLES
   $ hom edit -n=mycompany
 ```
 
-_See code: [src/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/edit.ts)_
+_See code: [src/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/edit.ts)_
 
 ## `hom export NAME CONTENT`
 
@@ -128,7 +128,7 @@ EXAMPLES
   $ hom export export_name "some kind of content"
 ```
 
-_See code: [src/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/export.ts)_
+_See code: [src/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/export.ts)_
 
 ## `hom function NAME`
 
@@ -153,7 +153,7 @@ EXAMPLES
   $ hom function function_name -c "echo $something" -d "this is what it do"
 ```
 
-_See code: [src/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/function.ts)_
+_See code: [src/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/function.ts)_
 
 ## `hom help [COMMANDS]`
 
@@ -190,7 +190,7 @@ EXAMPLES
   $ hom install
 ```
 
-_See code: [src/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/install.ts)_
+_See code: [src/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/install.ts)_
 
 ## `hom list [NAME]`
 
@@ -216,7 +216,7 @@ EXAMPLES
   $ hom list -n=mycompany
 ```
 
-_See code: [src/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/list.ts)_
+_See code: [src/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/list.ts)_
 
 ## `hom ls [NAME]`
 
@@ -248,7 +248,8 @@ moves a hom file between namespaces
 
 ```
 USAGE
-  $ hom move NAME -d <value> -t alias|export|function|partial|script [-n <value>]
+  $ hom move NAME -d <value> -t alias|export|function|partial|script [-n
+    <value>]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
@@ -269,7 +270,7 @@ EXAMPLES
   $ hom move FILE_NAME
 ```
 
-_See code: [src/commands/move.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/move.ts)_
+_See code: [src/commands/move.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/move.ts)_
 
 ## `hom mv NAME`
 
@@ -277,7 +278,8 @@ moves a hom file between namespaces
 
 ```
 USAGE
-  $ hom mv NAME -d <value> -t alias|export|function|partial|script [-n <value>]
+  $ hom mv NAME -d <value> -t alias|export|function|partial|script [-n
+    <value>]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
@@ -318,7 +320,7 @@ EXAMPLES
   $ hom open -n=mycompany
 ```
 
-_See code: [src/commands/open.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/open.ts)_
+_See code: [src/commands/open.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/open.ts)_
 
 ## `hom partial [NAME]`
 
@@ -343,7 +345,7 @@ EXAMPLES
   $ hom partial -n=mycompany
 ```
 
-_See code: [src/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/partial.ts)_
+_See code: [src/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/partial.ts)_
 
 ## `hom plugins`
 
@@ -646,7 +648,7 @@ EXAMPLES
   $ hom remove FILE_NAME
 ```
 
-_See code: [src/commands/remove.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/remove.ts)_
+_See code: [src/commands/remove.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/remove.ts)_
 
 ## `hom rm NAME`
 
@@ -695,7 +697,7 @@ EXAMPLES
   $ hom run -n=mycompany
 ```
 
-_See code: [src/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/run.ts)_
+_See code: [src/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/run.ts)_
 
 ## `hom script [NAME]`
 
@@ -720,7 +722,7 @@ EXAMPLES
   $ hom script -n=mycompany
 ```
 
-_See code: [src/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/script.ts)_
+_See code: [src/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/script.ts)_
 
 ## `hom set`
 
@@ -742,7 +744,7 @@ EXAMPLES
   $ hom set -n=mycompany
 ```
 
-_See code: [src/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.9/src/commands/set.ts)_
+_See code: [src/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.10/src/commands/set.ts)_
 
 ## `hom update [CHANNEL]`
 
@@ -794,7 +796,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 FLAG DESCRIPTIONS
-  --verbose  Show additional information about the CLI.
+      --verbose  Show additional information about the CLI.
 
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```
