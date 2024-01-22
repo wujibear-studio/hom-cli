@@ -248,8 +248,7 @@ moves a hom file between namespaces
 
 ```
 USAGE
-  $ hom move NAME -d <value> -t alias|export|function|partial|script [-n
-    <value>]
+  $ hom move NAME -d <value> -t alias|export|function|partial|script [-n <value>]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
@@ -278,8 +277,7 @@ moves a hom file between namespaces
 
 ```
 USAGE
-  $ hom mv NAME -d <value> -t alias|export|function|partial|script [-n
-    <value>]
+  $ hom mv NAME -d <value> -t alias|export|function|partial|script [-n <value>]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
@@ -796,7 +794,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 FLAG DESCRIPTIONS
-      --verbose  Show additional information about the CLI.
+  --verbose  Show additional information about the CLI.
 
     Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```

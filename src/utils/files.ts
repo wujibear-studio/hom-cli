@@ -15,6 +15,7 @@ export const ShellFileTypes = {
 }
 
 export const FileTypeKeys: string[] = Object.keys(ShellFileTypes)
+export const FileTypeValues: string[] = Object.values(ShellFileTypes)
 
 export function dirPaths() {
   const homDir = '.hom'
@@ -39,10 +40,11 @@ export interface PathDetails {
 }
 
 export function closestPath({namespace, type, name}: PathDetails): string {
+  if (type && !FileTypeValues.includes(type)) console.error(`A type of '${type}' was passed but it is not a valid shell type`)
   const crumb = [dirPaths().HOM_DIR]
   namespace && crumb.push(namespace)
   // @ts-ignore
-  namespace && type && crumb.push(ShellFileTypes[type])
+  namespace && type && crumb.push(type)
   namespace && type && name && crumb.push(`${name}.sh`)
 
   return path.join(...crumb)
