@@ -56,8 +56,7 @@ export function setupFilePath(filePath: string) {
 }
 
 export async function setupShellSourceFiles() {
-  const {GITIGNORE_PATH, CORE_DIR} = dirPaths()
-  fs.mkdirSync(CORE_DIR, {recursive: true})
+  const {GITIGNORE_PATH} = dirPaths()
   if (!fs.existsSync(GITIGNORE_PATH)) new FileAPI(GITIGNORE_PATH).write(gitignoreContent)
 
   createConfigFile('init.sh', initContent)
@@ -66,8 +65,9 @@ export async function setupShellSourceFiles() {
 }
 
 async function createConfigFile(fileName: string, content: string) {
-  const {HOM_DIR} = dirPaths()
-  new FileAPI(path.join(HOM_DIR, fileName)).write(content)
+  const {CORE_DIR} = dirPaths()
+  fs.mkdirSync(CORE_DIR, {recursive: true})
+  new FileAPI(path.join(CORE_DIR, fileName)).write(content)
 }
 
 /*
