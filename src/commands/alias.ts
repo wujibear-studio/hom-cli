@@ -1,5 +1,5 @@
 import {Args } from '@oclif/core'
-import { NamespacedCommand } from '../NamespacedCommand.js'
+import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
 import { closestPath, ShellFileTypes } from '../utils/files.js'
 import {confirm} from '@inquirer/prompts'

@@ -1,6 +1,6 @@
 import {Args, Flags} from '@oclif/core'
-import { NamespacedCommand } from '../NamespacedCommand.js'
-import { closestPath, FileTypeKeys, setupFilePath } from '../utils/files.js'
+import { NamespacedCommand, RequiredTypeFlags, typeForExclusiveFlags } from '../CommandUtils.js'
+import { closestPath, setupFilePath } from '../utils/files.js'
 import * as fs from 'fs'
 
 export default class Move extends NamespacedCommand {
@@ -13,12 +13,7 @@ export default class Move extends NamespacedCommand {
 
   static flags = {
     destination: Flags.string({char: 'd', description: 'destination namespace', required: true}),
-    type: Flags.string({
-      char: 't',
-      description: 'type of file to move',
-      options: FileTypeKeys,
-      required: true
-    }),
+    ...RequiredTypeFlags
   }
 
   static args = {
@@ -27,8 +22,9 @@ export default class Move extends NamespacedCommand {
 
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Move)
-    const {namespace, type, destination} = flags
+    const {namespace, destination, ...flagType} = flags
     const {name} = args
+    const type = typeForExclusiveFlags(flagType)
     const filePath = closestPath({name, type, namespace})
     const newPath = closestPath({name, type, namespace: destination})
     if (!fs.existsSync(filePath)) return this.error(`This file does not exist: ${filePath}`)

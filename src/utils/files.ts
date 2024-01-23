@@ -3,15 +3,14 @@ import * as path from 'path'
 import * as os from 'os'
 import { selectShellType } from '../api/prompts.js'
 import FileAPI from '../api/files.js'
-const __dirname = path.dirname(process.argv[1])
 import { initContent, sourceDirContent, sourceNamespacesContent, gitignoreContent } from './templates.js'
 
 export const ShellFileTypes = {
-  alias: 'aliases',
-  export: 'exports',
-  function: 'functions',
-  partial: 'partials',
-  script: 'scripts',
+  "alias": 'aliases',
+  "export": 'exports',
+  "function": 'functions',
+  "partial": 'partials',
+  "script": 'scripts',
 }
 
 export const FileTypeKeys: string[] = Object.keys(ShellFileTypes)

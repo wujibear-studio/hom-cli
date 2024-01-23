@@ -87,15 +87,18 @@ edits a hom file in your editor
 
 ```
 USAGE
-  $ hom edit [NAME] [-n <value>] [-t alias|export|function|partial|script]
+  $ hom edit [NAME] [-n <value>] [-a | -e | -f | -p | -s]
 
 ARGUMENTS
   NAME  filename to edit (omit the extension)
 
 FLAGS
+  -a, --alias
+  -e, --export
+  -f, --function
   -n, --namespace=<value>  namespace
-  -t, --type=<option>      type of files to edit
-                           <options: alias|export|function|partial|script>
+  -p, --partial
+  -s, --script
 
 DESCRIPTION
   edits a hom file in your editor
@@ -248,17 +251,19 @@ moves a hom file between namespaces
 
 ```
 USAGE
-  $ hom move NAME -d <value> -t alias|export|function|partial|script [-n
-    <value>]
+  $ hom move NAME -d <value> [-n <value>] [-a] [-e] [-f] [-p] [-s]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
 
 FLAGS
+  -a, --alias
   -d, --destination=<value>  (required) destination namespace
+  -e, --export
+  -f, --function
   -n, --namespace=<value>    [default: user] namespace directory to use
-  -t, --type=<option>        (required) type of file to move
-                             <options: alias|export|function|partial|script>
+  -p, --partial
+  -s, --script
 
 DESCRIPTION
   moves a hom file between namespaces
@@ -278,17 +283,19 @@ moves a hom file between namespaces
 
 ```
 USAGE
-  $ hom mv NAME -d <value> -t alias|export|function|partial|script [-n
-    <value>]
+  $ hom mv NAME -d <value> [-n <value>] [-a] [-e] [-f] [-p] [-s]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
 
 FLAGS
+  -a, --alias
   -d, --destination=<value>  (required) destination namespace
+  -e, --export
+  -f, --function
   -n, --namespace=<value>    [default: user] namespace directory to use
-  -t, --type=<option>        (required) type of file to move
-                             <options: alias|export|function|partial|script>
+  -p, --partial
+  -s, --script
 
 DESCRIPTION
   moves a hom file between namespaces
@@ -306,12 +313,15 @@ opens a shell namespace, or folder in your finder
 
 ```
 USAGE
-  $ hom open [-n <value>] [-t alias|export|function|partial|script]
+  $ hom open [-n <value>] [-a | -e | -f | -p | -s]
 
 FLAGS
+  -a, --alias
+  -e, --export
+  -f, --function
   -n, --namespace=<value>  namespace
-  -t, --type=<option>      type of files to edit
-                           <options: alias|export|function|partial|script>
+  -p, --partial
+  -s, --script
 
 DESCRIPTION
   opens a shell namespace, or folder in your finder
@@ -628,15 +638,18 @@ removes a shell file
 
 ```
 USAGE
-  $ hom remove NAME -t alias|export|function|partial|script [-n <value>]
+  $ hom remove NAME [-n <value>] [-a | -e | -f | -p | -s]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
 
 FLAGS
+  -a, --alias
+  -e, --export
+  -f, --function
   -n, --namespace=<value>  [default: user] namespace directory to use
-  -t, --type=<option>      (required) type of file to move
-                           <options: alias|export|function|partial|script>
+  -p, --partial
+  -s, --script
 
 DESCRIPTION
   removes a shell file
@@ -656,15 +669,18 @@ removes a shell file
 
 ```
 USAGE
-  $ hom rm NAME -t alias|export|function|partial|script [-n <value>]
+  $ hom rm NAME [-n <value>] [-a | -e | -f | -p | -s]
 
 ARGUMENTS
   NAME  filename to move (omit the extension)
 
 FLAGS
+  -a, --alias
+  -e, --export
+  -f, --function
   -n, --namespace=<value>  [default: user] namespace directory to use
-  -t, --type=<option>      (required) type of file to move
-                           <options: alias|export|function|partial|script>
+  -p, --partial
+  -s, --script
 
 DESCRIPTION
   removes a shell file

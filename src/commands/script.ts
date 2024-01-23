@@ -1,7 +1,7 @@
 import {Args, Flags} from '@oclif/core'
 import { Exec } from '../api/shell.js'
 import { ShellFileTypes, closestPath } from '../utils/files.js'
-import { NamespacedCommand } from '../NamespacedCommand.js'
+import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
 import FileAPI from '../api/files.js'
 import { template } from '../api/templates.js'

@@ -1,6 +1,7 @@
 import {Command, Flags} from '@oclif/core'
 import { Exec } from '../api/shell.js'
-import { closestPath, FileTypeKeys } from '../utils/files.js'
+import { closestPath } from '../utils/files.js'
+import { typeForExclusiveFlags, ExclusiveTypeFlags } from '../CommandUtils.js';
 
 export default class Edit extends Command {
   static description = 'opens a shell namespace, or folder in your finder'
@@ -11,16 +12,13 @@ export default class Edit extends Command {
 
   static flags = {
     namespace: Flags.string({char: 'n', description: 'namespace'}),
-    type: Flags.string({
-      char: 't',
-      description: 'type of files to edit',
-      options: FileTypeKeys
-    }),
+    ...ExclusiveTypeFlags
   }
 
   public async run(): Promise<void> {
     const {flags} = await this.parse(Edit)
-    const {namespace, type} = flags
+    const {namespace, ...flagType} = flags
+    const type = typeForExclusiveFlags(flagType)
     const filePath = closestPath({name: undefined, type, namespace})
     const command = `open ${filePath}`
 
