@@ -51,7 +51,7 @@ function filesInNamespace(name: string): Namespace | null {
   const namespaceDir: string = path.join(HOM_DIR, name)
   if (!name || !fs.existsSync(namespaceDir)) return null
 
-  const folders = fs.readdirSync(namespaceDir)
+  const folders = fs.readdirSync(namespaceDir).filter(file => !file.match(/^\./))
   const children = new Map()
 
   folders.forEach(folder => {
