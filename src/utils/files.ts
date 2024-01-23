@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as os from 'os'
 import { selectShellType } from '../api/prompts.js'
 import FileAPI from '../api/files.js'
-import { initContent, sourceDirContent, sourceNamespacesContent, gitignoreContent } from './templates.js'
+import { initContent, sourceDirContent, sourceNamespacesContent, gitignoreContent } from './shell_config_files.js'
 
 export const ShellFileTypes = {
   "alias": 'aliases',

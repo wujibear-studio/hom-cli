@@ -4,7 +4,7 @@ import { ShellFileTypes, closestPath } from '../utils/files.js'
 import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
 import FileAPI from '../api/files.js'
-import { template } from '../api/templates.js'
+import { renderTemplate } from '../api/templates.js'
 
 export default class Edit extends NamespacedCommand {
   static description = 'creates a shell function'
@@ -33,7 +33,7 @@ export default class Edit extends NamespacedCommand {
     const {namespace, content, description} = flags
     const {name} = args
     const filePath = closestPath({name, type: ShellFileTypes.function, namespace})
-    const fileContent = await template.render('function', {functionName: name, content, description})
+    const fileContent = await renderTemplate('function', {functionName: name, content, description})
     if (!fs.existsSync(filePath)) new FileAPI(filePath).write(fileContent)
     if (content) return
 

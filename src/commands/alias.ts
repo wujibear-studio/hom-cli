@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import { closestPath, ShellFileTypes } from '../utils/files.js'
 import {confirm} from '@inquirer/prompts'
 import FileAPI from '../api/files.js'
-import { template } from '../api/templates.js'
+import { renderTemplate } from '../api/templates.js'
 
 export default class Alias extends NamespacedCommand {
   static description = 'creates an alias for your shell'
@@ -16,6 +16,7 @@ export default class Alias extends NamespacedCommand {
   static args = {
     name: Args.string({description: 'the call name of your alias', required: true}),
     content: Args.string({description: 'the content of your alias', required: true}),
+    description: Args.string({char: 'd', description: 'a description for the alias'}),
   }
 
   public async run(): Promise<void> {
@@ -31,7 +32,8 @@ export default class Alias extends NamespacedCommand {
       })
       if (!overwrite) return
     }
-    const fileContent = await template.render('alias', {aliasName: name, content})
+    console.log('alias', name, content, filePath)
+    const fileContent = await renderTemplate('alias', {aliasName: name, content})
     new FileAPI(filePath).write(fileContent)
   }
 }

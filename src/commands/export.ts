@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import { closestPath, ShellFileTypes } from '../utils/files.js'
 import {confirm} from '@inquirer/prompts'
 import FileAPI from '../api/files.js'
-import { template } from '../api/templates.js'
+import { renderTemplate } from '../api/templates.js'
 
 export default class Export extends NamespacedCommand {
   static description = 'creates an export for your shell'
@@ -31,7 +31,7 @@ export default class Export extends NamespacedCommand {
       })
       if (!overwrite) return
     }
-    const fileContent = await template.render('export', {exportName: name, content})
+    const fileContent = await renderTemplate('export', {exportName: name, content})
     new FileAPI(filePath).write(fileContent)
   }
 }

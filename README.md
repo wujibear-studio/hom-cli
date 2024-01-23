@@ -27,7 +27,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hom alias NAME CONTENT`](#hom-alias-name-content)
+* [`hom alias NAME CONTENT [DESCRIPTION]`](#hom-alias-name-content-description)
 * [`hom edit [NAME]`](#hom-edit-name)
 * [`hom export NAME CONTENT`](#hom-export-name-content)
 * [`hom function NAME`](#hom-function-name)
@@ -57,17 +57,18 @@ USAGE
 * [`hom update [CHANNEL]`](#hom-update-channel)
 * [`hom version`](#hom-version)
 
-## `hom alias NAME CONTENT`
+## `hom alias NAME CONTENT [DESCRIPTION]`
 
 creates an alias for your shell
 
 ```
 USAGE
-  $ hom alias NAME CONTENT [-n <value>]
+  $ hom alias NAME CONTENT [DESCRIPTION] [-n <value>]
 
 ARGUMENTS
-  NAME     the call name of your alias
-  CONTENT  the content of your alias
+  NAME         the call name of your alias
+  CONTENT      the content of your alias
+  DESCRIPTION  a description for the alias
 
 FLAGS
   -n, --namespace=<value>  [default: user] namespace directory to use
