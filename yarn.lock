@@ -1584,8 +1584,8 @@ __metadata:
   linkType: hard
 
 "@oclif/plugin-plugins@npm:^4":
-  version: 4.1.17
-  resolution: "@oclif/plugin-plugins@npm:4.1.17"
+  version: 4.1.21
+  resolution: "@oclif/plugin-plugins@npm:4.1.21"
   dependencies:
     "@oclif/core": ^3.10.2
     chalk: ^5.3.0
@@ -1596,7 +1596,7 @@ __metadata:
     shelljs: ^0.8.5
     validate-npm-package-name: ^5.0.0
     yarn: ^1.22.21
-  checksum: 0379408afc85bc842c70df8842a55d869778353a78862ec87c4d0bcaba123aec8b809d05dd9ef404fe8a5e714008c691fd5f2dc58aa2be5a8043fe18f14ee395
+  checksum: b937fed1e32827ca97a2191d7a6a8e9e029ca76fc415cc2eeddbe2128eb3cffdb078bb7402f5ff0c8394b9b0bc9f63dc477c2a16586569eb51bd0c6d4ae85857
   languageName: node
   linkType: hard
 
