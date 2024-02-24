@@ -1554,6 +1554,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oclif/core@npm:^3.19.2":
+  version: 3.19.6
+  resolution: "@oclif/core@npm:3.19.6"
+  dependencies:
+    "@types/cli-progress": ^3.11.5
+    ansi-escapes: ^4.3.2
+    ansi-styles: ^4.3.0
+    cardinal: ^2.1.1
+    chalk: ^4.1.2
+    clean-stack: ^3.0.1
+    cli-progress: ^3.12.0
+    color: ^4.2.3
+    debug: ^4.3.4
+    ejs: ^3.1.9
+    get-package-type: ^0.1.0
+    globby: ^11.1.0
+    hyperlinker: ^1.0.0
+    indent-string: ^4.0.0
+    is-wsl: ^2.2.0
+    js-yaml: ^3.14.1
+    natural-orderby: ^2.0.3
+    object-treeify: ^1.1.33
+    password-prompt: ^1.1.3
+    slice-ansi: ^4.0.0
+    string-width: ^4.2.3
+    strip-ansi: ^6.0.1
+    supports-color: ^8.1.1
+    supports-hyperlinks: ^2.2.0
+    widest-line: ^3.1.0
+    wordwrap: ^1.0.0
+    wrap-ansi: ^7.0.0
+  checksum: 47cf98b155d3d51e0b5f129fab3e15a9d048c1d15b6ce491703459632a9a18e16d0d7fbee5869cef852ba8334f8e03721ac207e1c735f2dbc92617b40ed67471
+  languageName: node
+  linkType: hard
+
 "@oclif/plugin-help@npm:^5":
   version: 5.2.20
   resolution: "@oclif/plugin-help@npm:5.2.20"
@@ -1648,13 +1683,13 @@ __metadata:
   linkType: hard
 
 "@oclif/test@npm:^3":
-  version: 3.1.12
-  resolution: "@oclif/test@npm:3.1.12"
+  version: 3.2.0
+  resolution: "@oclif/test@npm:3.2.0"
   dependencies:
-    "@oclif/core": ^3.18.1
+    "@oclif/core": ^3.19.2
     chai: ^4.4.1
-    fancy-test: ^3.0.8
-  checksum: 3fba7637814cd294a48ce0ece63c47b35a4cbcf6401933d75f27113fc7803cfe921f33f24fcdbfee734879cdacaa6b15477340f8ba64df1d0fceb41bb60924ed
+    fancy-test: ^3.0.10
+  checksum: 3e7940a14cccb2a917922ff4fe73db3d80c7a1a406c29b835ca62172480433b70f5a258d33cfbf2a0a6cf2ef3f37bb3522896680e4c3f61ab4d31dd540f17907
   languageName: node
   linkType: hard
 
@@ -4927,9 +4962,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fancy-test@npm:^3.0.8":
-  version: 3.0.8
-  resolution: "fancy-test@npm:3.0.8"
+"fancy-test@npm:^3.0.10":
+  version: 3.0.11
+  resolution: "fancy-test@npm:3.0.11"
   dependencies:
     "@types/chai": "*"
     "@types/lodash": "*"
@@ -4937,10 +4972,10 @@ __metadata:
     "@types/sinon": "*"
     lodash: ^4.17.13
     mock-stdin: ^1.0.0
-    nock: ^13.4.0
+    nock: ^13.5.3
     sinon: ^16.1.3
     stdout-stderr: ^0.1.9
-  checksum: 864c4bd47121df16e5ce0e7da597940b7e3abb21bf6029d55d71b762938107775a59e84c71ef3d8c6fecd4c6b64e32fcff244c5c28a3f52223ab49dbbc56687e
+  checksum: 7b4deb6e02b6de95d763c5e47e026d300416e486febe109003bfcf7fef9cce277e0862291872601786662d85c97e6801d10a8de3463fd23a93a3355da442ff4a
   languageName: node
   linkType: hard
 
@@ -7418,14 +7453,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nock@npm:^13.4.0":
-  version: 13.5.0
-  resolution: "nock@npm:13.5.0"
+"nock@npm:^13.5.3":
+  version: 13.5.3
+  resolution: "nock@npm:13.5.3"
   dependencies:
     debug: ^4.1.0
     json-stringify-safe: ^5.0.1
     propagate: ^2.0.0
-  checksum: b50d680da3287859f81626b426234ed81a43aae16455efd259a3044f4a6139677d97c7001f532def6b308e7c3ecf7517925f2a34b3aaf80ee2ced920cfce2799
+  checksum: f119e71d8e56a456a29bfa00a1d959387210fe8ada69443a7102fa9329a9c5fb2e0db149c4a00d304b11681127efd03fc0e6bc142a4ff609b1e153f70aa8712d
   languageName: node
   linkType: hard
 
