@@ -61,6 +61,15 @@ export function fileName({name}: PathDetails): string {
   return `${name}.sh`
 }
 
+export function findFilePath({namespace, type, name, settings}: PathDetails): string | null {
+  if (!(type && name)) return null
+
+  const dir = expectedDir({namespace, type, settings})
+  const filePath = path.join(dir, fileName({name}))
+
+  return fs.existsSync(filePath) ? filePath : null
+}
+
 export function findOrCreateFilePath({namespace, type, name, settings}: PathDetails): string {
   const dir = expectedDir({namespace, type, settings})
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })

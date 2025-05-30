@@ -1,6 +1,6 @@
 import {Args, Flags} from '@oclif/core'
 import { NamespacedCommand, RequiredTypeFlags, typeForExclusiveFlags } from '../CommandUtils.js'
-import { findOrCreateFilePath, setupFilePath } from '../utils/files.js'
+import { findFilePath, findOrCreateFilePath, setupFilePath } from '../utils/files.js'
 import * as fs from 'fs'
 import { settings } from '../api/config.js'
 
@@ -26,9 +26,9 @@ export default class Move extends NamespacedCommand {
     const {namespace, destination, ...flagType} = flags
     const {name} = args
     const type = typeForExclusiveFlags(flagType)
-    const filePath = findOrCreateFilePath({name, type, namespace, settings})
+    const filePath = findFilePath({name, type, namespace, settings})
     const newPath = findOrCreateFilePath({name, type, namespace: destination, settings})
-    if (!fs.existsSync(filePath)) return this.error(`This file does not exist: ${filePath}`)
+    if (!filePath) return this.error(`This file does not exist: ${name}`)
 
     setupFilePath(newPath)
     fs.copyFileSync(filePath, newPath)
