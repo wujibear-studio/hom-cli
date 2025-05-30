@@ -1,7 +1,7 @@
 import {Args } from '@oclif/core'
 import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
-import { closestPath, ShellFileTypes } from '../utils/files.js'
+import { findOrCreateFilePath, ShellFileTypes } from '../utils/files.js'
 import {confirm} from '@inquirer/prompts'
 import FileAPI from '../api/files.js'
 import { renderTemplate } from '../api/templates.js'
@@ -22,7 +22,7 @@ export default class Export extends NamespacedCommand {
     const {args, flags} = await this.parse(Export)
     const {name, content} = args
     const {namespace} = flags
-    const filePath = closestPath({namespace, type: ShellFileTypes.export, name})
+    const filePath = findOrCreateFilePath({namespace, type: ShellFileTypes.export, name})
 
     if (fs.existsSync(filePath)) {
       const overwrite = await confirm({

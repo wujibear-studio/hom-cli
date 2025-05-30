@@ -1,7 +1,8 @@
 import {Command, Flags} from '@oclif/core'
 import { Exec } from '../api/shell.js'
-import { closestPath } from '../utils/files.js'
-import { typeForExclusiveFlags, ExclusiveTypeFlags } from '../CommandUtils.js';
+import { findOrCreateFilePath } from '../utils/files.js'
+import { typeForExclusiveFlags, ExclusiveTypeFlags } from '../CommandUtils.js'
+import { settings } from '../api/config.js'
 
 export default class Edit extends Command {
   static description = 'opens a shell namespace, or folder in your finder'
@@ -19,7 +20,7 @@ export default class Edit extends Command {
     const {flags} = await this.parse(Edit)
     const {namespace, ...flagType} = flags
     const type = typeForExclusiveFlags(flagType)
-    const filePath = closestPath({name: undefined, type, namespace})
+    const filePath = findOrCreateFilePath({name: undefined, type, namespace, settings})
     const command = `open ${filePath}`
 
     Exec(command) // Vim fails, probs needs specific thread?

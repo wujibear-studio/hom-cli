@@ -11,17 +11,24 @@ export const ShellFileTypes = {
   "function": 'functions',
   "partial": 'partials',
   "script": 'scripts',
-}
+} as const
+
+export type ShellFileType = typeof ShellFileTypes[keyof typeof ShellFileTypes]
+const FileTypeValues = Object.values(ShellFileTypes)
 
 export const FileTypeKeys: string[] = Object.keys(ShellFileTypes)
-export const FileTypeValues: string[] = Object.values(ShellFileTypes)
 
 export function dirPaths() {
-  const homDir = '.hom'
+  // In test environment, use the environment variable
+  // In production, always use the standard path
+  const isTest = process.env.NODE_ENV === 'test'
+  const defaultPath = path.join(os.homedir(), '.hom')
+  const homDir = isTest && process.env.HOM_DIR ? process.env.HOM_DIR : defaultPath
+  const coreDir = path.join(homDir, '.core')
   return {
-    HOM_DIR: path.join(os.homedir(), homDir),
-    CORE_DIR: path.join(os.homedir(), homDir, '.core'),
-    GITIGNORE_PATH: path.join(os.homedir(), homDir, '.gitignore'),
+    HOM_DIR: homDir,
+    CORE_DIR: coreDir,
+    GITIGNORE_PATH: path.join(homDir, '.gitignore'),
   }
 }
 export function sourceLine() { 
@@ -34,25 +41,62 @@ export function namespaceDir(namespace: string): string {
 
 export interface PathDetails {
   namespace?: string;
-  type?: string;
+  type?: ShellFileType;
   name?: string;
+  settings?: any;
 }
 
-export function closestPath({namespace, type, name}: PathDetails): string {
-  if (type && !FileTypeValues.includes(type)) console.error(`A type of '${type}' was passed but it is not a valid shell type`)
-  const crumb = [dirPaths().HOM_DIR]
-  namespace && crumb.push(namespace)
-  // @ts-ignore
-  namespace && type && crumb.push(type)
-  namespace && type && name && crumb.push(`${name}.sh`)
+export function isTest() {
+  return process.env.NODE_ENV === 'test'
+}
+
+export function expectedDir({namespace, type, settings}: PathDetails): string {
+  const normalizedNamespace = namespace?.length && namespace || settings?.defaultNamespace
+  const crumb = [dirPaths().HOM_DIR, normalizedNamespace, type].filter(obj => obj)
 
   return path.join(...crumb)
 }
 
+export function fileName({name}: PathDetails): string {
+  return `${name}.sh`
+}
+
+export function findOrCreateFilePath({namespace, type, name, settings}: PathDetails): string {
+  const dir = expectedDir({namespace, type, settings})
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+  if (!name) return dir
+
+  return path.join(dir, fileName({name}))
+}
+
 export function setupFilePath(filePath: string) {
-  if (!fs.existsSync(path.dirname(filePath))) {
-    fs.mkdirSync(path.dirname(filePath), {recursive: true})
+  if (process.env.NODE_ENV === 'test') {
+    console.error(`setupFilePath called with:`, filePath)
+    console.error(`Directory exists?`, fs.existsSync(path.dirname(filePath)))
   }
+
+  // Create all necessary directories in the path
+  const dirPath = path.dirname(filePath)
+  if (!fs.existsSync(dirPath)) {
+    if (process.env.NODE_ENV === 'test') {
+      console.error(`Creating directory structure:`, dirPath)
+      console.error(`Creating directory with recursive:`, { dirPath })
+    }
+    fs.mkdirSync(dirPath, { recursive: true })
+    
+    if (process.env.NODE_ENV === 'test') {
+      console.error(`Directory created? ${fs.existsSync(dirPath)}`)
+      console.error(`Directory contents:`, fs.readdirSync(path.dirname(dirPath)))
+    }
+  }
+
+  if (process.env.NODE_ENV === 'test') {
+    console.error(`Directory exists after setup?`, fs.existsSync(path.dirname(filePath)))
+    if (fs.existsSync(path.dirname(filePath))) {
+      console.error(`Directory contents after setup:`, fs.readdirSync(path.dirname(filePath)))
+    }
+  }
+
   return filePath
 }
 

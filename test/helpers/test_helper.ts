@@ -6,7 +6,6 @@ import * as os from 'os'
 // Debug helper to list all files in a directory recursively
 export function listDirContents(dir: string, indent: string = ''): string {
   try {
-    process.stdout.write(`\nScanning directory: ${dir}\n`)
     let output = ''
     const items = fs.readdirSync(dir)
     
@@ -88,7 +87,7 @@ export function setupTestEnv(): TestContext {
   fs.mkdirSync(homDir, { recursive: true })
   
   // Create namespace directories
-  const namespaces = ['user', 'work']
+  const namespaces = ['user']
   const types = ['aliases', 'functions', 'exports', 'scripts', 'partials']
   
   for (const namespace of namespaces) {

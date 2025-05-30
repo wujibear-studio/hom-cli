@@ -1,6 +1,6 @@
 import {Args, Flags} from '@oclif/core'
 import { Exec } from '../api/shell.js'
-import { ShellFileTypes, closestPath } from '../utils/files.js'
+import { ShellFileTypes, findOrCreateFilePath } from '../utils/files.js'
 import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
 import FileAPI from '../api/files.js'
@@ -32,7 +32,7 @@ export default class Edit extends NamespacedCommand {
     const {args, flags} = await this.parse(Edit)
     const {namespace, content, description} = flags
     const {name} = args
-    const filePath = closestPath({name, type: ShellFileTypes.function, namespace})
+    const filePath = findOrCreateFilePath({name, type: ShellFileTypes.function, namespace})
     const fileContent = await renderTemplate('function', {functionName: name, content, description})
     if (!fs.existsSync(filePath)) new FileAPI(filePath).write(fileContent)
     if (content) return
