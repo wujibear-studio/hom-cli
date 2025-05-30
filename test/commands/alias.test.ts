@@ -8,13 +8,14 @@ describe('alias command', () => {
 
   beforeEach(() => {
     context = setupTestEnv()
-    process.stdout.write('\n=== Test Starting ===\n')
+    process.stdout.write(`\n=== Test Starting at ${new Date().toISOString()} ===\n`)
     process.stdout.write(`Test home dir: ${context.tempHomeDir}\n`)
     process.stdout.write(`Initial directory structure:\n${listDirContents(context.tempHomeDir)}\n`)
+    fs.appendFileSync('/tmp/hom-debug.log', `\nappendfilesync at ${new Date().toISOString()} in test before`)
   })
 
   afterEach(() => {
-    process.stdout.write('\n=== Test Ending ===\n')
+    process.stdout.write(`\n=== Test Ending at ${new Date().toISOString()} ===\n`)
     cleanupTestEnv(context)
   })
 
@@ -24,6 +25,18 @@ describe('alias command', () => {
     .stdout()
     .command(['alias', 'my-ls', 'ls -la'])
     .it('creates an alias file with the correct content', async (ctx) => {
+      process.stderr.write(`\nChecking debug log at ${new Date().toISOString()}...\n`)
+      const debugLogPath = '/tmp/hom-debug.log'
+      const privateDebugLogPath = '/private/tmp/hom-debug.log'
+      process.stderr.write(`Debug log exists at ${debugLogPath}? ${fs.existsSync(debugLogPath)}\n`)
+      process.stderr.write(`Debug log exists at ${privateDebugLogPath}? ${fs.existsSync(privateDebugLogPath)}\n`)
+      
+      if (fs.existsSync(debugLogPath)) {
+        process.stderr.write(`Debug log contents: ${fs.readFileSync(debugLogPath, 'utf-8')}\n`)
+      } else if (fs.existsSync(privateDebugLogPath)) {
+        process.stderr.write(`Debug log contents: ${fs.readFileSync(privateDebugLogPath, 'utf-8')}\n`)
+      }
+
       process.stderr.write('\nDirectory structure:\n')
       process.stderr.write(listDirContents(context.tempHomeDir))
       process.stderr.write('\nRunning assertions...\n')
@@ -41,6 +54,7 @@ describe('alias command', () => {
     test
     .timeout(10000)
     .stdout()
+    .stderr()
     .command(['alias', 'my-ls', 'ls -la', '--namespace', 'work'])
     .it('creates an alias in the specified namespace', async (ctx) => {
       process.stderr.write('\nChecking namespace directory structure...\n')
@@ -55,6 +69,10 @@ aliases exists: ${fs.existsSync(aliasesPath)}\n`)
 
       process.stderr.write('\nFull directory structure:\n')
       process.stderr.write(listDirContents(context.tempHomeDir))
+      
+      process.stderr.write('\nCommand output:\n')
+      process.stderr.write(`stdout: ${ctx.stdout}\n`)
+      process.stderr.write(`stderr: ${ctx.stderr}\n`)
       
       const filePath = path.join(aliasesPath, 'my-ls.sh')
       process.stderr.write(`\nChecking alias file: ${filePath}\n`)

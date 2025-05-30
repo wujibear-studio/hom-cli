@@ -32,20 +32,47 @@ export default class Alias extends NamespacedCommand {
     const {args, flags} = await this.parse(Alias)
     const {name, content} = args
     const {namespace, description} = flags
+    const debugPath = '/tmp/hom-debug.log'
 
+    console.error('=== Alias Command Execution ===')
+    console.error('Current NODE_ENV:', process.env.NODE_ENV)
+    console.error('Debug path exists before write?', fs.existsSync(debugPath))
+    
+    // Try to create or append to the debug log
+    try {
+      fs.writeFileSync(debugPath, '\nwritefilesync a in alias', { flag: 'a' })
+      console.error('Write succeeded')
+    } catch (error) {
+      console.error('Write failed:', error)
+    }
+    
     if (process.env.NODE_ENV === 'test') {
-      console.error('Alias command running with:', { name, content, namespace, description })
+      try {
+        // Now try to write our debug info
+        fs.appendFileSync(debugPath, '\n=== Alias Command Debug ===\n')
+        fs.appendFileSync(debugPath, `Running with: ${JSON.stringify({ name, content, namespace, description })}\n`)
+        fs.appendFileSync(debugPath, `Process CWD: ${process.cwd()}\n`)
+        fs.appendFileSync(debugPath, `HOME: ${process.env.HOME}\n`)
+        fs.appendFileSync(debugPath, `Debug file exists: ${fs.existsSync(debugPath)}\n`)
+      } catch (error) {
+        console.error('Failed to write debug log:', error)
+      }
     }
 
     const filePath = findOrCreateFilePath({namespace, type: ShellFileTypes.alias, name, settings})
 
     if (process.env.NODE_ENV === 'test') {
-      console.error('Alias command got file path:', filePath)
-      const dirPath = path.dirname(filePath)
-      console.error('Directory path:', dirPath)
-      console.error('Directory exists?', fs.existsSync(dirPath))
-      if (fs.existsSync(dirPath)) {
-        console.error('Directory contents:', fs.readdirSync(dirPath))
+      try {
+        const debugPath = '/tmp/hom-debug.log'
+        fs.appendFileSync(debugPath, `Got file path: ${filePath}\n`)
+        const dirPath = path.dirname(filePath)
+        fs.appendFileSync(debugPath, `Directory path: ${dirPath}\n`)
+        fs.appendFileSync(debugPath, `Directory exists? ${fs.existsSync(dirPath)}\n`)
+        if (fs.existsSync(dirPath)) {
+          fs.appendFileSync(debugPath, `Directory contents: ${fs.readdirSync(dirPath)}\n`)
+        }
+      } catch (error) {
+        console.error('Failed to write debug log:', error)
       }
     }
 

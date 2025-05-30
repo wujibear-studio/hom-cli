@@ -82,10 +82,21 @@ export function setupTestEnv(): TestContext {
   process.env.HOME = tempHomeDir
   process.env.HOM_DIR = path.join(tempHomeDir, '.hom')
   
+  console.error('=== Test Environment Setup ===')
+  console.error('Looking for command in:', path.resolve(process.cwd(), 'dist/commands/alias.js'))
+  console.error('Source file exists:', fs.existsSync(path.resolve(process.cwd(), 'src/commands/alias.ts')))
+  console.error('Compiled file exists:', fs.existsSync(path.resolve(process.cwd(), 'dist/commands/alias.js')))
+  
   // Create the necessary directory structure
   const homDir = path.join(tempHomeDir, '.hom')
   fs.mkdirSync(homDir, { recursive: true })
-  
+
+  if (!fs.existsSync('/tmp/hom-debug.log')) {
+    fs.writeFileSync('/tmp/hom-debug.log', 'test') // helpful in debugging
+  }
+  fs.writeFileSync('/tmp/hom-debug.log', '\nwritefilesync a in test_helper', { flag: 'a' })
+  fs.appendFileSync('/tmp/hom-debug.log', '\nappendfilesync a in test_helper')
+
   // Create namespace directories
   const namespaces = ['user']
   const types = ['aliases', 'functions', 'exports', 'scripts', 'partials']

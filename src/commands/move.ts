@@ -30,7 +30,7 @@ export default class Move extends NamespacedCommand {
     const newPath = findOrCreateFilePath({name, type, namespace: destination, settings})
     if (!filePath) return this.error(`This file does not exist: ${name}`)
 
-    setupFilePath(newPath)
+    setupFilePath(newPath) // redundant?
     fs.copyFileSync(filePath, newPath)
     if (fs.existsSync(newPath)) fs.unlinkSync(filePath)
   }

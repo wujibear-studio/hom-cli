@@ -49,7 +49,7 @@
   "oclif": {
     "bin": "hom",
     "dirname": "hom",
-    "commands": "./dist/commands",
+    "commands": "./dist/src/commands",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-version",

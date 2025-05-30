@@ -78,6 +78,7 @@ export function findOrCreateFilePath({namespace, type, name, settings}: PathDeta
   return path.join(dir, fileName({name}))
 }
 
+// redundant?
 export function setupFilePath(filePath: string) {
   if (process.env.NODE_ENV === 'test') {
     console.error(`setupFilePath called with:`, filePath)
