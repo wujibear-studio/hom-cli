@@ -55,7 +55,7 @@ describe('function command', () => {
     .stdout()
     .command(['function'])
     .catch(error => {
-      expect(error.message).to.contain('Missing required arg')
+      expect(error.message).to.contain('Missing 1 required arg')
     })
     .it('fails when no name is provided')
 
@@ -64,6 +64,7 @@ describe('function command', () => {
     .command(['function', 'invalid name'])
     .catch(error => {
       expect(error.message).to.contain('Invalid function name')
+      expect(error.message).to.contain('must start with a letter or underscore')
     })
     .it('fails with invalid function name')
   })

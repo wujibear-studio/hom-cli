@@ -32,6 +32,12 @@ export default class Edit extends NamespacedCommand {
     const {args, flags} = await this.parse(Edit)
     const {namespace, content, description} = flags
     const {name} = args
+
+    // Validate function name
+    if (!/^[a-zA-Z_][a-zA-Z0-9_-]*$/.test(name)) {
+      throw new Error('Invalid function name. Function names must start with a letter or underscore and can only contain letters, numbers, underscores, and hyphens.')
+    }
+
     const filePath = findOrCreateFilePath({name, type: ShellFileTypes.function, namespace})
     const fileContent = await renderTemplate('function', {functionName: name, content, description})
     if (!fs.existsSync(filePath)) new FileAPI(filePath).write(fileContent)
