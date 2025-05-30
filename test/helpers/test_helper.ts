@@ -3,6 +3,74 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 
+// Debug utilities
+export interface DebugOptions {
+  logToFile?: boolean;
+  logToConsole?: boolean;
+  debugPath?: string;
+}
+
+export class TestDebugger {
+  private static instance: TestDebugger;
+  private debugPath: string;
+  private logToFile: boolean;
+  private logToConsole: boolean;
+  private enabled: boolean = false;
+
+  private constructor(options: DebugOptions = {}) {
+    this.debugPath = options.debugPath || '/tmp/hom-debug.log';
+    this.logToFile = options.logToFile || false;
+    this.logToConsole = options.logToConsole || false;
+  }
+
+  static getInstance(): TestDebugger {
+    if (!TestDebugger.instance) {
+      TestDebugger.instance = new TestDebugger();
+    }
+    return TestDebugger.instance;
+  }
+
+  static configure(options: DebugOptions) {
+    const instance = TestDebugger.getInstance();
+    if (options.debugPath) instance.debugPath = options.debugPath;
+    if (options.logToFile !== undefined) instance.logToFile = options.logToFile;
+    if (options.logToConsole !== undefined) instance.logToConsole = options.logToConsole;
+  }
+
+  enable() {
+    this.enabled = true;
+    if (this.logToFile) {
+      // Clear the debug file
+      fs.writeFileSync(this.debugPath, '', { flag: 'w' });
+    }
+  }
+
+  disable() {
+    this.enabled = false;
+  }
+
+  log(message: string, context?: string) {
+    if (!this.enabled) return;
+
+    const timestamp = new Date().toISOString();
+    const contextStr = context ? ` [${context}]` : '';
+    const logMessage = `${timestamp}${contextStr}: ${message}\n`;
+
+    if (this.logToConsole) {
+      process.stderr.write(logMessage);
+    }
+
+    if (this.logToFile) {
+      fs.appendFileSync(this.debugPath, logMessage);
+    }
+  }
+
+  getLogContents(): string {
+    if (!this.logToFile || !fs.existsSync(this.debugPath)) return '';
+    return fs.readFileSync(this.debugPath, 'utf-8');
+  }
+}
+
 // Debug helper to list all files in a directory recursively
 export function listDirContents(dir: string, indent: string = ''): string {
   try {
@@ -82,21 +150,10 @@ export function setupTestEnv(): TestContext {
   process.env.HOME = tempHomeDir
   process.env.HOM_DIR = path.join(tempHomeDir, '.hom')
   
-  console.error('=== Test Environment Setup ===')
-  console.error('Looking for command in:', path.resolve(process.cwd(), 'dist/commands/alias.js'))
-  console.error('Source file exists:', fs.existsSync(path.resolve(process.cwd(), 'src/commands/alias.ts')))
-  console.error('Compiled file exists:', fs.existsSync(path.resolve(process.cwd(), 'dist/commands/alias.js')))
-  
   // Create the necessary directory structure
   const homDir = path.join(tempHomeDir, '.hom')
   fs.mkdirSync(homDir, { recursive: true })
-
-  if (!fs.existsSync('/tmp/hom-debug.log')) {
-    fs.writeFileSync('/tmp/hom-debug.log', 'test') // helpful in debugging
-  }
-  fs.writeFileSync('/tmp/hom-debug.log', '\nwritefilesync a in test_helper', { flag: 'a' })
-  fs.appendFileSync('/tmp/hom-debug.log', '\nappendfilesync a in test_helper')
-
+  
   // Create namespace directories
   const namespaces = ['user']
   const types = ['aliases', 'functions', 'exports', 'scripts', 'partials']

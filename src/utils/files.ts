@@ -80,31 +80,10 @@ export function findOrCreateFilePath({namespace, type, name, settings}: PathDeta
 
 // redundant?
 export function setupFilePath(filePath: string) {
-  if (process.env.NODE_ENV === 'test') {
-    console.error(`setupFilePath called with:`, filePath)
-    console.error(`Directory exists?`, fs.existsSync(path.dirname(filePath)))
-  }
-
   // Create all necessary directories in the path
   const dirPath = path.dirname(filePath)
   if (!fs.existsSync(dirPath)) {
-    if (process.env.NODE_ENV === 'test') {
-      console.error(`Creating directory structure:`, dirPath)
-      console.error(`Creating directory with recursive:`, { dirPath })
-    }
     fs.mkdirSync(dirPath, { recursive: true })
-    
-    if (process.env.NODE_ENV === 'test') {
-      console.error(`Directory created? ${fs.existsSync(dirPath)}`)
-      console.error(`Directory contents:`, fs.readdirSync(path.dirname(dirPath)))
-    }
-  }
-
-  if (process.env.NODE_ENV === 'test') {
-    console.error(`Directory exists after setup?`, fs.existsSync(path.dirname(filePath)))
-    if (fs.existsSync(path.dirname(filePath))) {
-      console.error(`Directory contents after setup:`, fs.readdirSync(path.dirname(filePath)))
-    }
   }
 
   return filePath
