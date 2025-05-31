@@ -96,6 +96,7 @@
     "node": "20.10.0",
     "yarn": "3.7.0"
   },
+  "packageManager": "yarn@3.7.0",
   "directories": {
     "test": "test"
   }

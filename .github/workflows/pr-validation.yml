@@ -15,8 +15,13 @@ jobs:
         with:
           node-version: '18'
           
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@3.7.0 --activate
+          
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
         
       - name: Run tests
         run: yarn test
