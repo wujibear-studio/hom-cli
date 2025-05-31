@@ -5,6 +5,7 @@ import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
 import FileAPI from '../api/files.js'
 import { renderTemplate } from '../api/templates.js'
+import { openInEditor } from '../utils/editor.js'
 
 export default class Edit extends NamespacedCommand {
   static description = 'creates a shell function'
@@ -43,7 +44,6 @@ export default class Edit extends NamespacedCommand {
     if (!fs.existsSync(filePath)) new FileAPI(filePath).write(fileContent)
     if (content) return
 
-    const command = `${process.env.EDITOR} ${filePath}`
-    Exec(command) // Vim fails, probs needs specific thread?
+    openInEditor(filePath)
   }
 }

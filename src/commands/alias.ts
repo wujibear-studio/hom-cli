@@ -33,13 +33,7 @@ export default class Alias extends NamespacedCommand {
     const {args, flags} = await this.parse(Alias)
     const {name, content} = args
     const {namespace, description} = flags
-    const debug = TestDebugger.getInstance()
-
-    debug.log('Command execution started', 'Alias')
-    debug.log(`Command arguments: ${JSON.stringify({ name, content, namespace, description })}`, 'Alias')
-
     const filePath = findOrCreateFilePath({namespace, type: ShellFileTypes.alias, name, settings})
-    debug.log(`File path: ${filePath}`, 'Alias')
 
     if (fs.existsSync(filePath)) {
       let overwrite: boolean
@@ -56,7 +50,6 @@ export default class Alias extends NamespacedCommand {
     }
 
     const fileContent = await renderTemplate('alias', {aliasName: name, content, description})
-    debug.log(`Writing file content: ${fileContent}`, 'Alias')
     
     new FileAPI(filePath).write(fileContent)
   }
