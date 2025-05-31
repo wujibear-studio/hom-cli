@@ -21,10 +21,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
       
       - name: Build
-        run: npm run build
+        run: yarn build
       
       - name: Get version
         id: version
@@ -44,7 +44,7 @@ jobs:
       - name: Pack for platforms
         run: |
           mkdir -p dist/tarballs
-          npx oclif pack tarballs
+          yarn oclif pack tarballs
           cd dist/tarballs
           for f in *.tar.gz; do
             mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
@@ -61,7 +61,7 @@ jobs:
           asset_content_type: application/gzip
       
       - name: Publish to npm
-        run: npm publish
+        run: yarn npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       

@@ -44,6 +44,6 @@ jobs:
       - name: Bump Version
         if: steps.labels.outputs.bump != 'none'
         run: |
-          npm version ${{ steps.labels.outputs.bump }} -m "Bump version to %s [skip ci]"
+          yarn version --${{ steps.labels.outputs.bump }} --message "Bump version to %s [skip ci]"
           git push
           git push --tags 
