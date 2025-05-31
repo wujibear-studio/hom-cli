@@ -3,6 +3,74 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
 
+/**
+ * Mock Editor System
+ * -----------------
+ * The mock editor system provides a way to test editor interactions consistently
+ * across all environments (local and CI). It simulates a text editor by:
+ * 1. Recording which files are opened
+ * 2. Writing predetermined content to those files
+ * 3. Allowing tests to verify the interaction
+ *
+ * Usage in tests:
+ * ```typescript
+ * describe('my command', () => {
+ *   let context: TestContext
+ *
+ *   beforeEach(() => {
+ *     context = setupTestEnv()
+ *   })
+ *
+ *   test
+ *   .stdout()
+ *   .do(() => {
+ *     // Set what content the editor should write
+ *     setMockEditorContent('my test content')
+ *   })
+ *   .command(['edit', 'myfile'])
+ *   .it('opens editor with correct file', () => {
+ *     // Verify the correct file was opened
+ *     const lastFile = getLastOpenedFile(context)
+ *     expect(lastFile).to.include('myfile.sh')
+ *
+ *     // Verify the content was written
+ *     const content = readShellFile(...)
+ *     expect(content).to.include('my test content')
+ *   })
+ * })
+ * ```
+ */
+
+// Mock editor interface
+export interface EditorMock {
+  lastOpenedFile?: string;
+  lastContent?: string;
+  mockContent: string;
+}
+
+export const editorMock: EditorMock = {
+  mockContent: 'test content'
+}
+
+// Create a mock editor script that records what file was opened and writes mock content
+function createMockEditorScript(tempDir: string): string {
+  const scriptPath = path.join(tempDir, 'mock-editor.js')
+  const scriptContent = `#!/usr/bin/env node
+const fs = require('fs');
+const filePath = process.argv[2];
+const mockContent = '${editorMock.mockContent}';
+
+// Record what file was opened
+fs.writeFileSync('${path.join(tempDir, 'editor-last-file')}', filePath);
+
+// Write the mock content to the file
+fs.writeFileSync(filePath, mockContent);
+`
+  fs.writeFileSync(scriptPath, scriptContent)
+  fs.chmodSync(scriptPath, '755') // Make executable
+  return scriptPath
+}
+
 // Debug utilities
 export interface DebugOptions {
   logToFile?: boolean;
@@ -138,6 +206,7 @@ export function expectShellFile(homDir: string, namespace: string, type: string,
 export interface TestContext {
   tempHomeDir: string
   originalEnv: NodeJS.ProcessEnv
+  mockEditorPath: string
 }
 
 // Setup test environment
@@ -145,10 +214,12 @@ export function setupTestEnv(): TestContext {
   const tempHomeDir = createTempHomeDir()
   const originalEnv = { ...process.env }
   
-  // Set up the HOM environment
+  // Create and set up mock editor
+  const mockEditorPath = createMockEditorScript(tempHomeDir)
   process.env.NODE_ENV = 'test'
   process.env.HOME = tempHomeDir
   process.env.HOM_DIR = path.join(tempHomeDir, '.hom')
+  process.env.EDITOR = mockEditorPath
   
   // Create the necessary directory structure
   const homDir = path.join(tempHomeDir, '.hom')
@@ -170,11 +241,23 @@ export function setupTestEnv(): TestContext {
   // Create settings.json with default settings
   const settingsPath = path.join(homDir, 'settings.json')
   const defaultSettings = {
-    defaultNamespace: 'user'
+    defaultNamespace: 'user',
+    defaultEditor: mockEditorPath
   }
   fs.writeFileSync(settingsPath, JSON.stringify(defaultSettings, null, 2))
   
-  return { tempHomeDir, originalEnv }
+  return { tempHomeDir, originalEnv, mockEditorPath }
+}
+
+// Get the last file opened by the mock editor
+export function getLastOpenedFile(context: TestContext): string | undefined {
+  const lastFilePath = path.join(context.tempHomeDir, 'editor-last-file')
+  return fs.existsSync(lastFilePath) ? fs.readFileSync(lastFilePath, 'utf-8') : undefined
+}
+
+// Set the content that the mock editor will write
+export function setMockEditorContent(content: string) {
+  editorMock.mockContent = content
 }
 
 // Cleanup test environment

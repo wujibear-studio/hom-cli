@@ -24,7 +24,9 @@ jobs:
         run: yarn install --immutable
         
       - name: Run tests
-        run: yarn test
+        run: CI=true yarn test
+        env:
+          EDITOR: 'true'  # Use the 'true' command as editor to prevent hanging
         
       - name: Run linting
         run: yarn lint

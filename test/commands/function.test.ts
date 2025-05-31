@@ -1,5 +1,6 @@
 import { expect, test } from '@oclif/test'
-import { setupTestEnv, cleanupTestEnv, expectShellFile, readShellFile, TestContext } from '../helpers/test_helper.js'
+import { setupTestEnv, cleanupTestEnv, expectShellFile, readShellFile, TestContext, setMockEditorContent, getLastOpenedFile } from '../helpers/test_helper.js'
+import * as path from 'path'
 
 describe('function command', () => {
   let context: TestContext
@@ -41,12 +42,33 @@ describe('function command', () => {
   describe('when creating a function without content', () => {
     test
     .stdout()
+    .do(() => {
+      setMockEditorContent('echo "Edited content"')
+    })
     .command(['function', 'greet'])
     .it('opens the editor for content input', ctx => {
-      // Note: This test might need modification based on how you want to handle editor opening
-      expectShellFile(context.tempHomeDir, 'user', 'functions', 'greet').toExist()
+      // Verify the editor was opened with the correct file
+      const lastOpenedFile = getLastOpenedFile(context)
+      const expectedPath = path.join(context.tempHomeDir, '.hom', 'user', 'functions', 'greet.sh')
+      expect(lastOpenedFile).to.equal(expectedPath)
+
+      // Verify the content was written correctly
       const content = readShellFile(context.tempHomeDir, 'user', 'functions', 'greet')
       expect(content).to.include('function greet()')
+      expect(content).to.include('echo "Edited content"')
+    })
+
+    test
+    .stdout()
+    .do(() => {
+      setMockEditorContent('# Custom content\necho "Custom greeting"')
+    })
+    .command(['function', 'custom_func'])
+    .it('saves custom content from editor', ctx => {
+      const content = readShellFile(context.tempHomeDir, 'user', 'functions', 'custom_func')
+      expect(content).to.include('function custom_func()')
+      expect(content).to.include('# Custom content')
+      expect(content).to.include('echo "Custom greeting"')
     })
   })
 
