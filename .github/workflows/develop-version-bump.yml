@@ -1,0 +1,49 @@
+name: Develop Version Management
+
+on:
+  pull_request:
+    branches: [develop]
+    types: [closed]
+
+jobs:
+  version-bump:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Configure Git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+      
+      - name: Get PR Labels
+        id: labels
+        run: |
+          LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name')
+          if echo "$LABELS" | grep -q "version:major"; then
+            echo "bump=major" >> $GITHUB_OUTPUT
+          elif echo "$LABELS" | grep -q "version:minor"; then
+            echo "bump=minor" >> $GITHUB_OUTPUT
+          elif echo "$LABELS" | grep -q "version:patch"; then
+            echo "bump=patch" >> $GITHUB_OUTPUT
+          else
+            echo "bump=none" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Bump Version
+        if: steps.labels.outputs.bump != 'none'
+        run: |
+          npm version ${{ steps.labels.outputs.bump }} -m "Bump version to %s [skip ci]"
+          git push
+          git push --tags 

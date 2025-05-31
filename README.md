@@ -10,6 +10,7 @@ The `hom` CLI gives you tools to manage and organize your personal utility scrip
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
+* [Release Flow](#release-flow)
 <!-- tocstop -->
 # Usage
 <!-- usage -->
@@ -820,3 +821,44 @@ FLAG DESCRIPTIONS
 
 _See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.0.11/src/commands/version.ts)_
 <!-- commandsstop -->
+
+# Release Flow
+
+This project uses a structured release process with automated version management and releases. Here's how it works:
+
+## Branch Structure
+- `main`: Production-ready code, only receives merges from `develop`
+- `develop`: Integration branch, receives feature branches and manages version bumping
+- Feature branches: Created from and merged back into `develop`
+
+## Development Process
+
+1. **Feature Development**
+   - Create a feature branch from `develop`
+   - Make your changes
+   - Open a PR to merge back into `develop`
+   - Add ONE of these labels to your PR:
+     - `version:patch` - Bug fixes and minor changes
+     - `version:minor` - New features (non-breaking)
+     - `version:major` - Breaking changes
+     - `no-version` - Documentation, tests, etc.
+
+2. **Merging to Develop**
+   - PR must pass all tests and lint checks
+   - Must have exactly one version-related label
+   - When merged, version is automatically bumped according to the PR label
+   - Version bump is committed back to `develop`
+
+3. **Release Process**
+   - Create a PR from `develop` to `main`
+   - When merged, automatically:
+     - Creates a GitHub release
+     - Publishes to npm
+     - Updates Homebrew formula
+     - Builds and uploads platform-specific tarballs
+
+## Version Management
+Versions follow [Semantic Versioning](https://semver.org/):
+- MAJOR version for incompatible API changes
+- MINOR version for new functionality in a backward compatible manner
+- PATCH version for backward compatible bug fixes
