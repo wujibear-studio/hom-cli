@@ -1,0 +1,19 @@
+class HomCli < Formula
+  desc "CLI tool for managing shell functions and aliases"
+  homepage "https://github.com/wujibear/hom-cli"
+  url "https://github.com/wujibear/hom-cli/releases/download/v${VERSION}/hom-cli-${VERSION}-darwin-x64.tar.gz"
+  sha256 "${SHA}"
+  version "${VERSION}"
+
+  depends_on "node"
+
+  def install
+    inreplace "bin/hom", "/usr/local/lib", libexec/"lib"
+    libexec.install Dir["*"]
+    bin.install_symlink libexec/"bin/hom"
+  end
+
+  test do
+    system bin/"hom", "--version"
+  end
+end 

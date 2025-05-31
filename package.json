@@ -48,21 +48,21 @@
   "name": "hom-cli",
   "oclif": {
     "bin": "hom",
-    "dirname": "hom",
+    "dirname": "hom-cli",
     "commands": "./dist/src/commands",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-version",
-      "@oclif/plugin-update",
-      "@oclif/plugin-plugins",
-      "@oclif/plugin-not-found"
+      "@oclif/plugin-plugins"
     ],
-    "jitPlugins": {},
     "topicSeparator": " ",
     "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
+      "hello": { "description": "Say hello to the world" }
+    },
+    "macos": {
+      "identifier": "com.github.wujibear.hom-cli"
+    },
+    "hooks": {
+      "init": "./dist/src/hooks/init/check-shell"
     }
   },
   "repository": {
