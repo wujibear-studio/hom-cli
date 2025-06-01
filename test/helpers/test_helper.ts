@@ -54,20 +54,28 @@ export const editorMock: EditorMock = {
 
 // Create a mock editor script that records what file was opened and writes mock content
 function createMockEditorScript(tempDir: string): string {
-  const scriptPath = path.join(tempDir, 'mock-editor.js')
-  const scriptContent = `#!/usr/bin/env node
-const fs = require('fs');
-const filePath = process.argv[2];
-const mockContent = '${editorMock.mockContent}';
+  const scriptPath = path.join(tempDir, 'mock-editor.sh')
+  const mockContentPath = path.join(tempDir, 'mock-content')
+  const lastFilePath = path.join(tempDir, 'editor-last-file')
+  
+  // Create initial mock content file with default content
+  fs.writeFileSync(mockContentPath, 'test content', { mode: 0o644 })
+  
+  const scriptContent = `#!/bin/bash
+FILE="\$1"
+LAST_FILE="${lastFilePath}"
+MOCK_CONTENT_FILE="${mockContentPath}"
 
-// Record what file was opened
-fs.writeFileSync('${path.join(tempDir, 'editor-last-file')}', filePath);
+# Ensure the target directory exists
+mkdir -p "\$(dirname "\$FILE")"
 
-// Write the mock content to the file
-fs.writeFileSync(filePath, mockContent);
+# Record what file was opened
+echo "\$FILE" > "\$LAST_FILE"
+
+# Write the mock content to the file
+cat "\$MOCK_CONTENT_FILE" > "\$FILE"
 `
-  fs.writeFileSync(scriptPath, scriptContent)
-  fs.chmodSync(scriptPath, '755') // Make executable
+  fs.writeFileSync(scriptPath, scriptContent, { mode: 0o755 })
   return scriptPath
 }
 
@@ -175,7 +183,17 @@ export function createTempHomeDir() {
 // Clean up test files
 export function cleanupTempDir(dir: string) {
   if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true })
+    // Delete all files and subdirectories recursively
+    const files = fs.readdirSync(dir)
+    for (const file of files) {
+      const filePath = path.join(dir, file)
+      if (fs.lstatSync(filePath).isDirectory()) {
+        cleanupTempDir(filePath)
+      } else {
+        fs.unlinkSync(filePath)
+      }
+    }
+    fs.rmdirSync(dir)
   }
 }
 
@@ -226,7 +244,7 @@ export function setupTestEnv(): TestContext {
   fs.mkdirSync(homDir, { recursive: true })
   
   // Create namespace directories
-  const namespaces = ['user']
+  const namespaces = ['user', 'work'] // Added 'work' namespace
   const types = ['aliases', 'functions', 'exports', 'scripts', 'partials']
   
   for (const namespace of namespaces) {
@@ -251,13 +269,15 @@ export function setupTestEnv(): TestContext {
 
 // Get the last file opened by the mock editor
 export function getLastOpenedFile(context: TestContext): string | undefined {
-  const lastFilePath = path.join(context.tempHomeDir, 'editor-last-file')
-  return fs.existsSync(lastFilePath) ? fs.readFileSync(lastFilePath, 'utf-8') : undefined
+  const lastFilePath = path.join(path.dirname(context.mockEditorPath), 'editor-last-file')
+  return fs.existsSync(lastFilePath) ? fs.readFileSync(lastFilePath, 'utf-8').trim() : undefined
 }
 
 // Set the content that the mock editor will write
 export function setMockEditorContent(content: string) {
-  editorMock.mockContent = content
+  const tempDir = path.dirname(process.env.EDITOR!)
+  const mockContentPath = path.join(tempDir, 'mock-content')
+  fs.writeFileSync(mockContentPath, content, { mode: 0o644 })
 }
 
 // Cleanup test environment
