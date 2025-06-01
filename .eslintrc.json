@@ -1,3 +1,76 @@
 {
-  "extends": ["oclif", "oclif-typescript", "prettier"]
+  "extends": [
+    "oclif",
+    "oclif-typescript",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "perfectionist",
+    "unicorn"
+  ],
+  "rules": {
+    // TypeScript
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/ban-types": "error",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+
+    // Import ordering
+    "perfectionist/sort-imports": ["error", {
+      "type": "natural",
+      "order": "asc",
+      "groups": [
+        "builtin",
+        "external",
+        "internal",
+        ["parent", "sibling", "index"],
+        "object",
+        "unknown"
+      ],
+      "newlines-between": "always",
+      "internal-pattern": ["@/**"]
+    }],
+
+    // Object/interface member ordering
+    "perfectionist/sort-objects": ["error", {
+      "type": "natural",
+      "order": "asc"
+    }],
+    "perfectionist/sort-interfaces": ["error", {
+      "type": "natural",
+      "order": "asc"
+    }],
+
+    // File naming
+    "unicorn/filename-case": ["error", {
+      "case": "kebabCase"
+    }],
+
+    // Node.js best practices
+    "unicorn/prefer-node-protocol": "error",
+    "unicorn/prefer-module": "error",
+
+    // Code style
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
+    ],
+    "object-shorthand": "error",
+    "prefer-arrow-callback": "error",
+    "eqeqeq": ["error", "always"],
+    "no-useless-escape": "error",
+
+    // Disable some overly strict rules
+    "unicorn/no-array-reduce": "off",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/switch-case-braces": "off",
+    "unicorn/no-negated-condition": "off",
+    "no-await-in-loop": "off",
+    "valid-jsdoc": "off"
+  }
 }
