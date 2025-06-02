@@ -1561,6 +1561,42 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oclif/core@npm:^3.26.6":
+  version: 3.27.0
+  resolution: "@oclif/core@npm:3.27.0"
+  dependencies:
+    "@types/cli-progress": ^3.11.5
+    ansi-escapes: ^4.3.2
+    ansi-styles: ^4.3.0
+    cardinal: ^2.1.1
+    chalk: ^4.1.2
+    clean-stack: ^3.0.1
+    cli-progress: ^3.12.0
+    color: ^4.2.3
+    debug: ^4.3.5
+    ejs: ^3.1.10
+    get-package-type: ^0.1.0
+    globby: ^11.1.0
+    hyperlinker: ^1.0.0
+    indent-string: ^4.0.0
+    is-wsl: ^2.2.0
+    js-yaml: ^3.14.1
+    minimatch: ^9.0.4
+    natural-orderby: ^2.0.3
+    object-treeify: ^1.1.33
+    password-prompt: ^1.1.3
+    slice-ansi: ^4.0.0
+    string-width: ^4.2.3
+    strip-ansi: ^6.0.1
+    supports-color: ^8.1.1
+    supports-hyperlinks: ^2.2.0
+    widest-line: ^3.1.0
+    wordwrap: ^1.0.0
+    wrap-ansi: ^7.0.0
+  checksum: 4d16ecf4810cf591099276c3068ef0703be3f85f4704265d37c5cb8bae5934027c22c6c0481a6173c7bfc2fdd304328c5db675e52358770da6e041c47f7e071a
+  languageName: node
+  linkType: hard
+
 "@oclif/plugin-help@npm:^5":
   version: 5.2.20
   resolution: "@oclif/plugin-help@npm:5.2.20"
@@ -1655,13 +1691,13 @@ __metadata:
   linkType: hard
 
 "@oclif/test@npm:^3":
-  version: 3.1.12
-  resolution: "@oclif/test@npm:3.1.12"
+  version: 3.2.15
+  resolution: "@oclif/test@npm:3.2.15"
   dependencies:
-    "@oclif/core": ^3.18.1
+    "@oclif/core": ^3.26.6
     chai: ^4.4.1
-    fancy-test: ^3.0.8
-  checksum: 3fba7637814cd294a48ce0ece63c47b35a4cbcf6401933d75f27113fc7803cfe921f33f24fcdbfee734879cdacaa6b15477340f8ba64df1d0fceb41bb60924ed
+    fancy-test: ^3.0.15
+  checksum: fd395819665fb3b9d0fd057d80359e88eaec8359217c68b89681e0fc6970a82946110915c2058d4016b641ecbdd6106bca026b73342f7fefce363c0f12381600
   languageName: node
   linkType: hard
 
@@ -4292,6 +4328,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debug@npm:^4.3.5":
+  version: 4.4.1
+  resolution: "debug@npm:4.4.1"
+  dependencies:
+    ms: ^2.1.3
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: a43826a01cda685ee4cec00fb2d3322eaa90ccadbef60d9287debc2a886be3e835d9199c80070ede75a409ee57828c4c6cd80e4b154f2843f0dc95a570dc0729
+  languageName: node
+  linkType: hard
+
 "debuglog@npm:^1.0.1":
   version: 1.0.1
   resolution: "debuglog@npm:1.0.1"
@@ -4462,6 +4510,17 @@ __metadata:
   version: 0.2.0
   resolution: "eastasianwidth@npm:0.2.0"
   checksum: 7d00d7cd8e49b9afa762a813faac332dee781932d6f2c848dc348939c4253f1d4564341b7af1d041853bc3f32c2ef141b58e0a4d9862c17a7f08f68df1e0f1ed
+  languageName: node
+  linkType: hard
+
+"ejs@npm:^3.1.10":
+  version: 3.1.10
+  resolution: "ejs@npm:3.1.10"
+  dependencies:
+    jake: ^10.8.5
+  bin:
+    ejs: bin/cli.js
+  checksum: ce90637e9c7538663ae023b8a7a380b2ef7cc4096de70be85abf5a3b9641912dde65353211d05e24d56b1f242d71185c6d00e02cb8860701d571786d92c71f05
   languageName: node
   linkType: hard
 
@@ -5122,9 +5181,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fancy-test@npm:^3.0.8":
-  version: 3.0.8
-  resolution: "fancy-test@npm:3.0.8"
+"fancy-test@npm:^3.0.15":
+  version: 3.0.16
+  resolution: "fancy-test@npm:3.0.16"
   dependencies:
     "@types/chai": "*"
     "@types/lodash": "*"
@@ -5132,10 +5191,10 @@ __metadata:
     "@types/sinon": "*"
     lodash: ^4.17.13
     mock-stdin: ^1.0.0
-    nock: ^13.4.0
+    nock: ^13.5.4
     sinon: ^16.1.3
     stdout-stderr: ^0.1.9
-  checksum: 864c4bd47121df16e5ce0e7da597940b7e3abb21bf6029d55d71b762938107775a59e84c71ef3d8c6fecd4c6b64e32fcff244c5c28a3f52223ab49dbbc56687e
+  checksum: 15652b70c40f0fa268348483c03b0da8b9b51e56df3857cd2e6965498d9ae8ca40ef23d19392053dd6b3fbf7f3a16e54574e288690ad38b9af456b55e503d8f0
   languageName: node
   linkType: hard
 
@@ -7532,7 +7591,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ms@npm:2.1.3, ms@npm:^2.0.0, ms@npm:^2.1.1, ms@npm:^2.1.2":
+"ms@npm:2.1.3, ms@npm:^2.0.0, ms@npm:^2.1.1, ms@npm:^2.1.2, ms@npm:^2.1.3":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
@@ -7635,14 +7694,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nock@npm:^13.4.0":
-  version: 13.5.0
-  resolution: "nock@npm:13.5.0"
+"nock@npm:^13.5.4":
+  version: 13.5.6
+  resolution: "nock@npm:13.5.6"
   dependencies:
     debug: ^4.1.0
     json-stringify-safe: ^5.0.1
     propagate: ^2.0.0
-  checksum: b50d680da3287859f81626b426234ed81a43aae16455efd259a3044f4a6139677d97c7001f532def6b308e7c3ecf7517925f2a34b3aaf80ee2ced920cfce2799
+  checksum: 82d31ef7a428e8a6bc430b2772745ecb1f9c8835170789bbcc29c9036614adf3b7112daeb6d59edd93f4340a9a96acee401021572d469a7a0e09a669679f2794
   languageName: node
   linkType: hard
 
