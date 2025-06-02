@@ -1,10 +1,10 @@
 import {Args, Flags} from '@oclif/core'
-import { Exec } from '../api/shell.js'
-import { ShellFileTypes, closestPath } from '../utils/files.js'
+import { ShellFileTypes, findOrCreateFilePath } from '../utils/files.js'
 import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
 import FileAPI from '../api/files.js'
 import { renderTemplate } from '../api/templates.js'
+import { openInEditor } from '../utils/editor.js'
 
 export default class Script extends NamespacedCommand {
   static description = 'creates a shell script that will NOT be run until called'
@@ -32,12 +32,11 @@ export default class Script extends NamespacedCommand {
     const {args, flags} = await this.parse(Script)
     const {namespace, content, description} = flags
     const {name} = args
-    const filePath = closestPath({name, type: ShellFileTypes.script, namespace})
+    const filePath = findOrCreateFilePath({name, type: ShellFileTypes.script, namespace})
     const fileContent = await renderTemplate('script', {scriptName: name, content, description})
     if (!fs.existsSync(filePath)) new FileAPI(filePath).write(fileContent)
     if (content) return
 
-    const command = `${process.env.EDITOR} ${filePath}`
-    Exec(command) // Vim fails, probs needs specific thread?
+    openInEditor(filePath)
   }
 }

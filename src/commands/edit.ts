@@ -1,7 +1,8 @@
 import {Args, Command, Flags} from '@oclif/core'
-import { Exec } from '../api/shell.js'
-import { closestPath } from '../utils/files.js'
+import { findOrCreateFilePath } from '../utils/files.js'
 import { ExclusiveTypeFlags, typeForExclusiveFlags } from '../CommandUtils.js'
+import { settings } from '../api/config.js'
+import { openInEditor } from '../utils/editor.js'
 
 export default class Edit extends Command {
   static description = 'edits a <%= config.bin %> file in your editor'
@@ -24,9 +25,8 @@ export default class Edit extends Command {
     const {namespace, ...flagType} = flags
     const {name} = args
     const type = typeForExclusiveFlags(flagType)
-    const filePath = closestPath({name, type, namespace})
-    const command = `${process.env.EDITOR} ${filePath}`
-
-    Exec(command) // Vim fails, probs needs specific thread?
+    const filePath = findOrCreateFilePath({name, type, namespace, settings})
+    
+    openInEditor(filePath)
   }
 }

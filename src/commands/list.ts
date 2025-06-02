@@ -16,10 +16,6 @@ export default class List extends Command {
     }),
   }
 
-  static args = {
-    name: Args.string({description: 'filename to edit (omit the extension)'}),
-  }
-
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(List)
 

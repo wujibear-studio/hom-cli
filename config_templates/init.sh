@@ -7,5 +7,6 @@ export SUPPORTED_HOM_TYPES=(exports functions partials aliases scripts)
 
 source $HOM_CORE/source_namespaces.sh
 source $HOM_CORE/source_dir.sh
+source $HOM_CORE/hom_command.sh
 
 source_namespaces

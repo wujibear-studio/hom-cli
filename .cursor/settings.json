@@ -1,0 +1,41 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.format.semicolons": "remove",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.fixAll.eslint": true
+    }
+  },
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.printWidth": 100,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.bracketSpacing": true,
+  "prettier.arrowParens": "avoid",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "perfectionist.sortImports.type": "natural",
+  "perfectionist.sortImports.order": [
+    "builtin",
+    "external",
+    "internal",
+    ["parent", "sibling", "index"],
+    "object",
+    "unknown"
+  ],
+  "perfectionist.sortImports.newlines-between": "always",
+  "perfectionist.sortObjects.type": "natural",
+  "perfectionist.sortObjects.order": "asc",
+  "perfectionist.sortInterfaces.type": "natural",
+  "perfectionist.sortInterfaces.order": "asc"
+} 
