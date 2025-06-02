@@ -68,7 +68,7 @@ jobs:
       - name: Publish to npm
         run: yarn npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       
       - name: Update Homebrew formula
         run: |
