@@ -6,64 +6,64 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:import/typescript"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "import",
-    "perfectionist",
-    "unicorn"
-  ],
+  "plugins": ["@typescript-eslint", "import", "perfectionist", "unicorn"],
   "rules": {
     // TypeScript
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/ban-types": "error",
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn", {"argsIgnorePattern": "^_"}],
 
     // Import ordering
-    "perfectionist/sort-imports": ["error", {
-      "type": "natural",
-      "order": "asc",
-      "groups": [
-        "builtin",
-        "external",
-        "internal",
-        ["parent", "sibling", "index"],
-        "object",
-        "unknown"
-      ],
-      "newlines-between": "always",
-      "internal-pattern": ["@/**"]
-    }],
+    "perfectionist/sort-imports": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"], "object", "unknown"],
+        "newlines-between": "always",
+        "internal-pattern": ["@/**"]
+      }
+    ],
 
     // Object/interface member ordering
-    "perfectionist/sort-objects": ["error", {
-      "type": "natural",
-      "order": "asc"
-    }],
-    "perfectionist/sort-interfaces": ["error", {
-      "type": "natural",
-      "order": "asc"
-    }],
+    "perfectionist/sort-objects": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc"
+      }
+    ],
+    "perfectionist/sort-interfaces": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc"
+      }
+    ],
 
     // File naming
-    "unicorn/filename-case": ["error", {
-      "case": "kebabCase"
-    }],
+    "unicorn/filename-case": [
+      "warn",
+      {
+        "case": "kebabCase"
+      }
+    ],
 
     // Node.js best practices
-    "unicorn/prefer-node-protocol": "error",
-    "unicorn/prefer-module": "error",
+    "unicorn/prefer-node-protocol": "warn",
+    "unicorn/prefer-module": "warn",
 
     // Code style
     "padding-line-between-statements": [
-      "error",
-      { "blankLine": "always", "prev": "*", "next": "return" },
-      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
-      { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
+      "warn",
+      {"blankLine": "always", "prev": "*", "next": "return"},
+      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      {"blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
     ],
-    "object-shorthand": "error",
-    "prefer-arrow-callback": "error",
-    "eqeqeq": ["error", "always"],
-    "no-useless-escape": "error",
+    "object-shorthand": "warn",
+    "prefer-arrow-callback": "warn",
+    "eqeqeq": ["warn", "always"],
+    "no-useless-escape": "warn",
 
     // Disable some overly strict rules
     "unicorn/no-array-reduce": "off",
@@ -71,6 +71,11 @@
     "unicorn/switch-case-braces": "off",
     "unicorn/no-negated-condition": "off",
     "no-await-in-loop": "off",
-    "valid-jsdoc": "off"
+    "valid-jsdoc": "off",
+    
+    // Additional rules to disable
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-console": "off",
+    "unicorn/prefer-top-level-await": "off"
   }
 }

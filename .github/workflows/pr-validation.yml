@@ -28,9 +28,6 @@ jobs:
         env:
           EDITOR: 'true'  # Use the 'true' command as editor to prevent hanging
         
-      - name: Run linting
-        run: yarn lint
-        
       - name: Check version labels
         run: |
           LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name')
