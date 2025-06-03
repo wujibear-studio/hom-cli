@@ -58,31 +58,23 @@ jobs:
           NODE_ENV=production yarn install
           echo "Running oclif pack..."
           
-          # Pack for each platform
-          yarn oclif pack:deb
-          yarn oclif pack:macos
-          yarn oclif pack:win
+          # Bypass workspace commands
+          export OCLIF_SKIP_WORKSPACE_FOCUS=true
+          export OCLIF_SKIP_YARN_WORKSPACE=true
+          yarn oclif pack tarballs
           
           echo "Moving packages to tarballs directory..."
           mv dist/*.tar.gz dist/tarballs/ 2>/dev/null || true
-          mv dist/*.deb dist/tarballs/ 2>/dev/null || true
           
           echo "Checking tarballs directory..."
           ls -la dist/tarballs
           
           echo "Renaming tarballs..."
           cd dist/tarballs
-          for f in *; do
+          for f in *.tar.gz; do
             if [ -f "$f" ]; then
               echo "Processing $f..."
-              case "$f" in
-                *.tar.gz)
-                  mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
-                  ;;
-                *.deb)
-                  mv "$f" "hom-cli-$(echo $f | sed 's/.*_\(.*\)_.*\.deb/\1/')-${{ runner.os }}.deb"
-                  ;;
-              esac
+              mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
             fi
           done
           
