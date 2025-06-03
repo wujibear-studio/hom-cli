@@ -47,7 +47,7 @@ export const sourceNamespacesContent = `
 function source_namespaces() {
   setopt +o nomatch # Prevents error messages when there's no folder or files within them
   setopt BASH_REMATCH # allows zsh to handle regex same as bash
-  namespaces=$(cd $HOM_DIR && echo */)
+  namespaces=$(ls -d "$HOM_DIR"/*/ 2>/dev/null | xargs -n1 basename)
 
   for namespace in $namespaces
   do

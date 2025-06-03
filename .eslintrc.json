@@ -1,3 +1,81 @@
 {
-  "extends": ["oclif", "oclif-typescript", "prettier"]
+  "extends": [
+    "oclif",
+    "oclif-typescript",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript"
+  ],
+  "plugins": ["@typescript-eslint", "import", "perfectionist", "unicorn"],
+  "rules": {
+    // TypeScript
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn", {"argsIgnorePattern": "^_"}],
+
+    // Import ordering
+    "perfectionist/sort-imports": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"], "object", "unknown"],
+        "newlines-between": "always",
+        "internal-pattern": ["@/**"]
+      }
+    ],
+
+    // Object/interface member ordering
+    "perfectionist/sort-objects": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc"
+      }
+    ],
+    "perfectionist/sort-interfaces": [
+      "warn",
+      {
+        "type": "natural",
+        "order": "asc"
+      }
+    ],
+
+    // File naming
+    "unicorn/filename-case": [
+      "warn",
+      {
+        "case": "kebabCase"
+      }
+    ],
+
+    // Node.js best practices
+    "unicorn/prefer-node-protocol": "warn",
+    "unicorn/prefer-module": "warn",
+
+    // Code style
+    "padding-line-between-statements": [
+      "warn",
+      {"blankLine": "always", "prev": "*", "next": "return"},
+      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      {"blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
+    ],
+    "object-shorthand": "warn",
+    "prefer-arrow-callback": "warn",
+    "eqeqeq": ["warn", "always"],
+    "no-useless-escape": "warn",
+
+    // Disable some overly strict rules
+    "unicorn/no-array-reduce": "off",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/switch-case-braces": "off",
+    "unicorn/no-negated-condition": "off",
+    "no-await-in-loop": "off",
+    "valid-jsdoc": "off",
+    
+    // Additional rules to disable
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-console": "off",
+    "unicorn/prefer-top-level-await": "off"
+  }
 }

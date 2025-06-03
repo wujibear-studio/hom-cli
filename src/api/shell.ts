@@ -40,3 +40,17 @@ export function Spawn(
   cmd.on("error", error => onError && onError(error))
   cmd.on("close", code => onClose && onClose(code))
 }
+
+export function ExecInteractive(command: string, args: string[] = []): void {
+  const child = spawn(command, args, {
+    stdio: 'inherit',  // This is key for TTY handling
+    shell: false,      // Direct process spawn, not through shell
+  })
+
+  // Handle process exit
+  child.on('exit', (code) => {
+    if (code !== 0) {
+      console.error(`Editor process exited with code ${code}`)
+    }
+  })
+}

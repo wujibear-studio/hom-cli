@@ -1,0 +1,44 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@3.7.0 --activate
+          
+      - name: Install dependencies
+        run: yarn install --immutable
+        
+      - name: Run tests
+        run: CI=true yarn test
+        env:
+          EDITOR: 'true'  # Use the 'true' command as editor to prevent hanging
+        
+      - name: Check version labels
+        run: |
+          LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name')
+          VERSION_LABELS=$(echo "$LABELS" | grep -c "version:" || true)
+          if [ "$VERSION_LABELS" -gt "1" ]; then
+            echo "Error: Only one version label should be applied"
+            exit 1
+          fi
+          if [ "$VERSION_LABELS" -eq "0" ] && ! echo "$LABELS" | grep -q "no-version"; then
+            echo "Error: PR must have either a version label or no-version label"
+            exit 1
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

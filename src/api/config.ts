@@ -15,7 +15,7 @@ export class Config {
   }
 
   constructor () {
-    this.configPath = setupFilePath(`${dirPaths().HOM_DIR}/settings.json`)
+    this.configPath = setupFilePath(`${dirPaths().HOM_DIR}/settings.json`) // use findOrCreateFilePath?
 
     if (fs.existsSync(this.configPath)) {
       try {

@@ -40,7 +40,12 @@ export function listNamespaces(): Object | void {
   return namespaces.reduce((acc: any, namespace: string) => {
     const filePath = path.join(HOM_DIR, namespace)
     const isDir = fs.lstatSync(filePath).isDirectory()
-    if (isDir && !namespace.match(/^\./)) acc.set(namespace, filesInNamespace(namespace))
+    const hiddenDir = namespace.match(/^\./)
+
+    if (isDir && !hiddenDir) {
+     const files = filesInNamespace(namespace)
+     if (files?.children?.size) acc.set(namespace, files)
+    }
 
     return acc
   }, new Map())
@@ -57,8 +62,10 @@ function filesInNamespace(name: string): Namespace | null {
   folders.forEach(folder => {
     const dir = path.join(namespaceDir, folder)
     const childFiles = filesForShellType(dir)
-    if (childFiles) children.set(folder, childFiles)
+    if (childFiles?.length) children.set(folder, childFiles)
   })
+
+  if (children.size == 0) return null
 
   return {name: name, dir: namespaceDir, children: children, type: 'namespace'}
 } 

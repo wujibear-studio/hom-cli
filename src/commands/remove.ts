@@ -1,7 +1,8 @@
 import {Args} from '@oclif/core'
 import { NamespacedCommand, ExclusiveTypeFlags, typeForExclusiveFlags } from '../CommandUtils.js'
-import { closestPath } from '../utils/files.js'
+import { findOrCreateFilePath } from '../utils/files.js'
 import * as fs from 'fs'
+import { settings } from '../api/config.js'
 
 export default class Remove extends NamespacedCommand {
   static aliases = ['rm']
@@ -22,7 +23,7 @@ export default class Remove extends NamespacedCommand {
     const {namespace, json, ...flagType} = flags
     const {name} = args
     const type = typeForExclusiveFlags(flagType)
-    const filePath = closestPath({name, type, namespace})
+    const filePath = findOrCreateFilePath({name, type, namespace, settings})
     if (!fs.existsSync(filePath)) return this.log(`The file has already been removed: ${filePath}`)
 
     fs.unlinkSync(filePath)

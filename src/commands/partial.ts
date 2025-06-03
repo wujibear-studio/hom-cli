@@ -1,10 +1,10 @@
 import {Args, Flags} from '@oclif/core'
-import { Exec } from '../api/shell.js'
-import { ShellFileTypes, closestPath } from '../utils/files.js'
+import { ShellFileTypes, findOrCreateFilePath } from '../utils/files.js'
 import { NamespacedCommand } from '../CommandUtils.js'
 import * as fs from 'fs'
 import FileAPI from '../api/files.js'
 import { renderTemplate } from '../api/templates.js'
+import { openInEditor } from '../utils/editor.js'
 
 export default class Partial extends NamespacedCommand {
   static description = 'creates a partial to better organize your shell'
@@ -32,12 +32,11 @@ export default class Partial extends NamespacedCommand {
     const {args, flags} = await this.parse(Partial)
     const {namespace, content, description} = flags
     const {name} = args
-    const filePath = closestPath({name, type: ShellFileTypes.partial, namespace})
+    const filePath = findOrCreateFilePath({name, type: ShellFileTypes.partial, namespace})
     const fileContent = await renderTemplate('partial', {partialName: name, content, description})
     if (!fs.existsSync(filePath)) new FileAPI(filePath).write(fileContent)
     if (content) return
 
-    const command = `${process.env.EDITOR} ${filePath}`
-    Exec(command) // Vim fails, probs needs specific thread?
+    openInEditor(filePath)
   }
 }
