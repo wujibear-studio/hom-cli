@@ -22,7 +22,10 @@ jobs:
           
       - name: Setup Yarn
         run: |
-          npm install -g yarn@3.7.0
+          npm install -g corepack
+          corepack enable
+          corepack prepare yarn@3.7.0 --activate
+          yarn set version 3.7.0
       
       - name: Install dependencies
         run: yarn install
