@@ -20,13 +20,12 @@ jobs:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org'
           
-      - name: Enable Corepack
+      - name: Setup Yarn
         run: |
-          corepack enable
-          corepack prepare yarn@3.7.0 --activate
+          npm install -g yarn@3.7.0
       
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
       
       - name: Build
         run: yarn build
