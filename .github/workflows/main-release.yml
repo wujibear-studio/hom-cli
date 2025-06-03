@@ -56,10 +56,21 @@ jobs:
         run: |
           mkdir -p dist/tarballs
           NODE_ENV=production yarn install
+          echo "Running oclif pack..."
           yarn oclif pack tarballs --no-xz
+          echo "Checking tarballs directory..."
+          ls -la dist/tarballs
+          echo "Renaming tarballs..."
           cd dist/tarballs
+          shopt -s nullglob
           for f in *.tar.gz; do
-            mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
+            if [ -f "$f" ]; then
+              echo "Processing $f..."
+              mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
+            else
+              echo "No .tar.gz files found in dist/tarballs"
+              exit 1
+            fi
           done
       
       - name: Upload Release Assets
