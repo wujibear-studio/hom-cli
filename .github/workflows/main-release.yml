@@ -60,33 +60,41 @@ jobs:
           NODE_ENV=production yarn install --no-immutable
           
           echo "Running oclif pack..."
-          # Bypass workspace commands and set explicit platform
+          # Bypass workspace commands
           export OCLIF_SKIP_WORKSPACE_FOCUS=true
           export OCLIF_SKIP_YARN_WORKSPACE=true
           
-          # Run pack commands for each platform
-          echo "Packing for Linux (x64)..."
-          yarn oclif pack --targets=linux-x64 --debug
+          # Try oclif-dev pack command with error capture
+          echo "Attempting to pack with oclif-dev..."
+          if ! yarn oclif-dev pack 2>pack-error.log; then
+            echo "Error during packing:"
+            cat pack-error.log
+            exit 1
+          fi
           
           echo "Moving packages to tarballs directory..."
-          # Create tarballs dir if it doesn't exist
           mkdir -p dist/tarballs
           
-          # Move any tarballs and show verbose output
-          echo "Looking for tarballs in dist directory..."
-          find . -name "*.tar.gz" -type f -print
-          find . -name "*.tar.gz" -type f -exec mv -v {} dist/tarballs/ \;
+          # Look for tarballs in multiple possible locations
+          echo "Searching for tarballs..."
+          for dir in "./dist" "./tmp" "."; do
+            echo "Checking in $dir..."
+            if [ -d "$dir" ]; then
+              find "$dir" -name "*.tar.gz" -type f -print
+              find "$dir" -name "*.tar.gz" -type f -exec mv -v {} dist/tarballs/ \; || true
+            fi
+          done
           
           echo "Checking tarballs directory..."
-          ls -la dist/tarballs
+          ls -la dist/tarballs || true
           
           # Verify we have tarballs
-          if [ -z "$(ls -A dist/tarballs)" ]; then
+          if [ -z "$(ls -A dist/tarballs 2>/dev/null)" ]; then
             echo "Error: No packages were created in dist/tarballs"
-            echo "Contents of dist directory:"
-            ls -R dist
-            echo "Contents of current directory:"
-            ls -R .
+            echo "Directory structure:"
+            find . -type d -print
+            echo "All tar.gz files in workspace:"
+            find . -name "*.tar.gz" -type f -print
             exit 1
           fi
           
@@ -95,9 +103,14 @@ jobs:
           for f in *.tar.gz; do
             if [ -f "$f" ]; then
               echo "Processing $f..."
-              new_name="hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-linux-x64.tar.gz"
-              echo "Renaming $f to $new_name"
-              mv "$f" "$new_name"
+              version=$(echo "$f" | grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+' | sed 's/v//')
+              if [ -n "$version" ]; then
+                new_name="hom-cli-${version}-linux-x64.tar.gz"
+                echo "Renaming $f to $new_name"
+                mv "$f" "$new_name"
+              else
+                echo "Warning: Could not extract version from filename $f"
+              fi
             fi
           done
       
