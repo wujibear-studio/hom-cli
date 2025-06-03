@@ -3,7 +3,7 @@
 
 export HOM_DIR=$HOME/.hom
 export HOM_CORE=$HOM_DIR/.core
-export SUPPORTED_HOM_TYPES=(exports functions partials aliases scripts)
+export SOURCEABLE_HOM_TYPES=(exports functions partials aliases) # we do NOT source scripts, as hom will run them when called for
 
 source $HOM_CORE/source_namespaces.sh
 source $HOM_CORE/source_dir.sh

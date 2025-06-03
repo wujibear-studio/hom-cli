@@ -31,6 +31,9 @@ jobs:
       - name: Build
         run: yarn build
       
+      - name: Generate oclif manifest
+        run: yarn oclif manifest
+      
       - name: Get version
         id: version
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
@@ -49,7 +52,8 @@ jobs:
       - name: Pack for platforms
         run: |
           mkdir -p dist/tarballs
-          yarn oclif pack tarballs
+          yarn install --production
+          yarn oclif pack tarballs --no-xz
           cd dist/tarballs
           for f in *.tar.gz; do
             mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
