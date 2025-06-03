@@ -31,27 +31,38 @@ jobs:
       - name: Build
         run: yarn build
       
+      - name: Generate oclif manifest
+        run: yarn oclif manifest
+      
       - name: Test tarball creation
         run: |
           # Create dist directory
-          mkdir -p dist
+          mkdir -p dist/tarballs
           
-          # Install oclif globally for CLI access
-          echo "Installing @oclif/cli globally..."
-          yarn global add @oclif/cli
+          # Create tarball using yarn pack in current directory
+          echo "Creating tarball..."
+          yarn pack
+          sleep 1  # Add a small delay to ensure file is written
           
-          # Add global yarn bin to PATH
-          export PATH="$(yarn global bin):$PATH"
+          # Show what was created
+          echo "Files in current directory:"
+          ls -la package*
           
-          echo "Running oclif pack..."
-          oclif pack tarballs
+          # Copy and remove the package
+          cp package.tgz dist/tarballs/hom-cli.tgz && rm package.tgz
           
           # Show what was created
           echo "Contents of dist directory:"
           ls -R dist
           
           # Check for tarballs
-          if ! find dist -name "*.tar.gz" -type f | grep -q .; then
+          if ! find dist/tarballs -name "*.tgz" -type f | grep -q .; then
             echo "No tarballs were created"
+            echo "Contents of all relevant directories:"
+            find . -name "*.tgz" -type f
             exit 1
-          fi 
+          fi
+          
+          # Upload artifacts for inspection if needed
+          echo "Creating artifact of dist directory..."
+          tar -czf dist-contents.tar.gz dist/ 
