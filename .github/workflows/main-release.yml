@@ -55,34 +55,47 @@ jobs:
       - name: Pack for platforms
         run: |
           mkdir -p dist/tarballs
-          NODE_ENV=production yarn install
-          echo "Running oclif pack..."
           
-          # Bypass workspace commands
+          # Production install with --no-immutable to handle peer deps
+          NODE_ENV=production yarn install --no-immutable
+          
+          echo "Running oclif pack..."
+          # Bypass workspace commands and set explicit platform
           export OCLIF_SKIP_WORKSPACE_FOCUS=true
           export OCLIF_SKIP_YARN_WORKSPACE=true
-          yarn oclif pack tarballs
+          export OCLIF_PLATFORM_ONLY=linux
+          
+          # Run pack command with explicit target and debug output
+          yarn oclif pack:linux --debug
           
           echo "Moving packages to tarballs directory..."
-          mv dist/*.tar.gz dist/tarballs/ 2>/dev/null || true
+          # Create tarballs dir if it doesn't exist
+          mkdir -p dist/tarballs
+          
+          # Move any tarballs and show verbose output
+          find dist -name "*.tar.gz" -exec mv -v {} dist/tarballs/ \;
           
           echo "Checking tarballs directory..."
           ls -la dist/tarballs
+          
+          # Verify we have tarballs
+          if [ -z "$(ls -A dist/tarballs)" ]; then
+            echo "Error: No packages were created in dist/tarballs"
+            echo "Contents of dist directory:"
+            ls -la dist
+            exit 1
+          fi
           
           echo "Renaming tarballs..."
           cd dist/tarballs
           for f in *.tar.gz; do
             if [ -f "$f" ]; then
               echo "Processing $f..."
-              mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
+              new_name="hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-linux.tar.gz"
+              echo "Renaming $f to $new_name"
+              mv "$f" "$new_name"
             fi
           done
-          
-          # Check if we have any files
-          if [ -z "$(ls -A)" ]; then
-            echo "No packages were created in dist/tarballs"
-            exit 1
-          fi
       
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
