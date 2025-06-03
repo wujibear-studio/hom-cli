@@ -55,7 +55,7 @@ jobs:
       - name: Pack for platforms
         run: |
           mkdir -p dist/tarballs
-          yarn install --mode=production
+          NODE_ENV=production yarn install
           yarn oclif pack tarballs --no-xz
           cd dist/tarballs
           for f in *.tar.gz; do
