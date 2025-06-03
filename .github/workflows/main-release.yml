@@ -63,17 +63,19 @@ jobs:
           # Bypass workspace commands and set explicit platform
           export OCLIF_SKIP_WORKSPACE_FOCUS=true
           export OCLIF_SKIP_YARN_WORKSPACE=true
-          export OCLIF_PLATFORM_ONLY=linux
           
-          # Run pack command with explicit target and debug output
-          yarn oclif pack:linux --debug
+          # Run pack commands for each platform
+          echo "Packing for Linux (x64)..."
+          yarn oclif pack --targets=linux-x64 --debug
           
           echo "Moving packages to tarballs directory..."
           # Create tarballs dir if it doesn't exist
           mkdir -p dist/tarballs
           
           # Move any tarballs and show verbose output
-          find dist -name "*.tar.gz" -exec mv -v {} dist/tarballs/ \;
+          echo "Looking for tarballs in dist directory..."
+          find . -name "*.tar.gz" -type f -print
+          find . -name "*.tar.gz" -type f -exec mv -v {} dist/tarballs/ \;
           
           echo "Checking tarballs directory..."
           ls -la dist/tarballs
@@ -82,7 +84,9 @@ jobs:
           if [ -z "$(ls -A dist/tarballs)" ]; then
             echo "Error: No packages were created in dist/tarballs"
             echo "Contents of dist directory:"
-            ls -la dist
+            ls -R dist
+            echo "Contents of current directory:"
+            ls -R .
             exit 1
           fi
           
@@ -91,7 +95,7 @@ jobs:
           for f in *.tar.gz; do
             if [ -f "$f" ]; then
               echo "Processing $f..."
-              new_name="hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-linux.tar.gz"
+              new_name="hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-linux-x64.tar.gz"
               echo "Renaming $f to $new_name"
               mv "$f" "$new_name"
             fi
