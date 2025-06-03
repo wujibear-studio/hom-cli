@@ -12,7 +12,7 @@ export const initContent = `
 
 export HOM_DIR=$HOME/.hom
 export HOM_CORE=$HOM_DIR/.core
-export SUPPORTED_HOM_TYPES=(exports functions partials aliases scripts)
+export SOURCEABLE_HOM_TYPES=(exports functions partials aliases)
 
 source $HOM_CORE/source_namespaces.sh
 source $HOM_CORE/source_dir.sh
@@ -28,7 +28,7 @@ function source_dir() {
   setopt +o nomatch
 
   # Source all custom files within config folders
-  for folder in \${SUPPORTED_HOM_TYPES[@]}
+  for folder in \${SOURCEABLE_HOM_TYPES[@]}
   do
     for file in $1/$folder/*.sh
     do

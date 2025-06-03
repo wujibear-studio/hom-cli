@@ -5,7 +5,7 @@ function source_dir() {
   setopt +o nomatch
 
   # Source all custom files within config folders
-  for folder in ${SUPPORTED_HOM_TYPES[@]}
+  for folder in ${SOURCEABLE_HOM_TYPES[@]}
   do
     for file in $1$folder/*.sh
     do
