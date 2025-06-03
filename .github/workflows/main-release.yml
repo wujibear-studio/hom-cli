@@ -57,21 +57,40 @@ jobs:
           mkdir -p dist/tarballs
           NODE_ENV=production yarn install
           echo "Running oclif pack..."
-          yarn oclif pack tarballs --no-xz
+          
+          # Pack for each platform
+          yarn oclif pack:deb
+          yarn oclif pack:macos
+          yarn oclif pack:win
+          
+          echo "Moving packages to tarballs directory..."
+          mv dist/*.tar.gz dist/tarballs/ 2>/dev/null || true
+          mv dist/*.deb dist/tarballs/ 2>/dev/null || true
+          
           echo "Checking tarballs directory..."
           ls -la dist/tarballs
+          
           echo "Renaming tarballs..."
           cd dist/tarballs
-          shopt -s nullglob
-          for f in *.tar.gz; do
+          for f in *; do
             if [ -f "$f" ]; then
               echo "Processing $f..."
-              mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
-            else
-              echo "No .tar.gz files found in dist/tarballs"
-              exit 1
+              case "$f" in
+                *.tar.gz)
+                  mv "$f" "hom-cli-$(echo $f | sed 's/.*-v\(.*\)-.*/\1/')-${{ runner.os }}.tar.gz"
+                  ;;
+                *.deb)
+                  mv "$f" "hom-cli-$(echo $f | sed 's/.*_\(.*\)_.*\.deb/\1/')-${{ runner.os }}.deb"
+                  ;;
+              esac
             fi
           done
+          
+          # Check if we have any files
+          if [ -z "$(ls -A)" ]; then
+            echo "No packages were created in dist/tarballs"
+            exit 1
+          fi
       
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
