@@ -3,6 +3,19 @@ HöM CLI
 
 The `hom` CLI gives you tools to manage and organize your personal utility scripts. Create your own namepsaced scripts, aliases, exports, functions, and partials often without needing to open an editor. Utilities you create are organized by type e.g., `~/.hom/NAMESPACE/aliases/YOUR_ALIAS.sh`
 
+## Installation
+
+### Using Homebrew (macOS)
+```sh
+brew tap wujibear-studio/hom
+brew install hom-cli
+```
+
+### Using npm
+```sh
+npm install -g hom-cli
+```
+
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
 [![GitHub license](https://img.shields.io/github/license/oclif/hello-world)](https://github.com/oclif/hello-world/blob/main/LICENSE)
@@ -16,7 +29,7 @@ The `hom` CLI gives you tools to manage and organize your personal utility scrip
 <!-- usage -->
 ```sh-session
 $ npm install -g hom-cli
-$ hom COMMANDT
+$ hom COMMAND
 running command...
 $ hom (--version)
 hom-cli/0.0.24 darwin-x64 node-v20.10.0
@@ -28,14 +41,14 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hom alias NAME CONTENT [DESCRIPTION]`](#hom-alias-name-content-description)
+* [`hom alias NAME CONTENT`](#hom-alias-name-content)
 * [`hom edit [NAME]`](#hom-edit-name)
 * [`hom export NAME CONTENT`](#hom-export-name-content)
 * [`hom function NAME`](#hom-function-name)
 * [`hom help [COMMANDS]`](#hom-help-commands)
 * [`hom install`](#hom-install)
-* [`hom list [NAME]`](#hom-list-name)
-* [`hom ls [NAME]`](#hom-ls-name)
+* [`hom list`](#hom-list)
+* [`hom ls`](#hom-ls)
 * [`hom move NAME`](#hom-move-name)
 * [`hom mv NAME`](#hom-mv-name)
 * [`hom open`](#hom-open)
@@ -55,24 +68,22 @@ USAGE
 * [`hom run [NAME]`](#hom-run-name)
 * [`hom script [NAME]`](#hom-script-name)
 * [`hom set`](#hom-set)
-* [`hom update [CHANNEL]`](#hom-update-channel)
-* [`hom version`](#hom-version)
 
-## `hom alias NAME CONTENT [DESCRIPTION]`
+## `hom alias NAME CONTENT`
 
 creates an alias for your shell
 
 ```
 USAGE
-  $ hom alias NAME CONTENT [DESCRIPTION] [-n <value>]
+  $ hom alias NAME CONTENT [-n <value>] [-d <value>]
 
 ARGUMENTS
-  NAME         the call name of your alias
-  CONTENT      the content of your alias
-  DESCRIPTION  a description for the alias
+  NAME     the call name of your alias
+  CONTENT  the content of your alias
 
 FLAGS
-  -n, --namespace=<value>  [default: user] namespace directory to use
+  -d, --description=<value>  a description for the alias
+  -n, --namespace=<value>    [default: user] namespace directory to use
 
 DESCRIPTION
   creates an alias for your shell
@@ -197,16 +208,13 @@ EXAMPLES
 
 _See code: [src/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.24/src/commands/install.ts)_
 
-## `hom list [NAME]`
+## `hom list`
 
 lists the docs for shell files within hom
 
 ```
 USAGE
-  $ hom list [NAME] [-n <value>]
-
-ARGUMENTS
-  NAME  filename to edit (omit the extension)
+  $ hom list [-n <value>]
 
 FLAGS
   -n, --namespace=<value>  namespace
@@ -223,16 +231,13 @@ EXAMPLES
 
 _See code: [src/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.24/src/commands/list.ts)_
 
-## `hom ls [NAME]`
+## `hom ls`
 
 lists the docs for shell files within hom
 
 ```
 USAGE
-  $ hom ls [NAME] [-n <value>]
-
-ARGUMENTS
-  NAME  filename to edit (omit the extension)
+  $ hom ls [-n <value>]
 
 FLAGS
   -n, --namespace=<value>  namespace
@@ -763,63 +768,6 @@ EXAMPLES
 ```
 
 _See code: [src/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.24/src/commands/set.ts)_
-
-## `hom update [CHANNEL]`
-
-update the hom CLI
-
-```
-USAGE
-  $ hom update [CHANNEL] [-a] [--force] [-i | -v <value>]
-
-FLAGS
-  -a, --available        See available versions.
-  -i, --interactive      Interactively select version to install. This is ignored if a channel is provided.
-  -v, --version=<value>  Install a specific version.
-      --force            Force a re-download of the requested version.
-
-DESCRIPTION
-  update the hom CLI
-
-EXAMPLES
-  Update to the stable channel:
-
-    $ hom update stable
-
-  Update to a specific version:
-
-    $ hom update --version 1.0.0
-
-  Interactively select version:
-
-    $ hom update --interactive
-
-  See available versions:
-
-    $ hom update --available
-```
-
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v4.1.8/src/commands/update.ts)_
-
-## `hom version`
-
-```
-USAGE
-  $ hom version [--json] [--verbose]
-
-FLAGS
-  --verbose  Show additional information about the CLI.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-FLAG DESCRIPTIONS
-      --verbose  Show additional information about the CLI.
-
-    Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
-```
-
-_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/v2.0.11/src/commands/version.ts)_
 <!-- commandsstop -->
 
 # Release Flow
