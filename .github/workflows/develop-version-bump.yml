@@ -59,8 +59,11 @@ jobs:
       - name: Bump Version
         if: steps.labels.outputs.bump != 'none'
         run: |
-          # Run version bump without git operations
-          yarn version --${{ steps.labels.outputs.bump }} --no-git-tag-version
+          # Update version in package.json
+          npm version ${{ steps.labels.outputs.bump }} --no-git-tag-version
+          
+          # Run oclif readme to update version in README
+          yarn oclif readme
           
           # Get the new version
           NEW_VERSION=$(node -p "require('./package.json').version")
