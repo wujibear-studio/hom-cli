@@ -28,6 +28,9 @@ jobs:
           corepack prepare yarn@3.7.0 --activate
           cp ~/.cache/node/corepack/v1/yarn/3.7.0/yarn.js .yarn/releases/yarn-3.7.0.cjs
       
+      - name: Install dependencies
+        run: yarn install
+      
       - name: Configure Git
         run: |
           git config user.name 'github-actions[bot]'
