@@ -6,9 +6,12 @@ on:
     types: [closed]
 
 jobs:
-  release:
+  prepare-release:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'develop'
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -51,13 +54,34 @@ jobs:
           release_name: Release v${{ steps.version.outputs.version }}
           draft: false
           prerelease: false
+
+  build-tarballs:
+    needs: prepare-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Setup Yarn
+        run: |
+          mkdir -p .yarn/releases
+          npm install -g corepack
+          corepack enable
+          corepack prepare yarn@3.7.0 --activate
+          cp ~/.cache/node/corepack/v1/yarn/3.7.0/yarn.js .yarn/releases/yarn-3.7.0.cjs
+      
+      - name: Install dependencies
+        run: |
+          # Production install with --no-immutable to handle peer deps
+          NODE_ENV=production yarn install --no-immutable
       
       - name: Pack for platforms
         run: |
           mkdir -p dist/tarballs
-          
-          # Production install with --no-immutable to handle peer deps
-          NODE_ENV=production yarn install --no-immutable
           
           echo "Running oclif pack..."
           # Bypass workspace commands
@@ -113,21 +137,62 @@ jobs:
               fi
             fi
           done
-      
+
+      - name: Upload tarballs artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: release-tarballs
+          path: dist/tarballs/
+          
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/tarballs/
-          asset_name: hom-cli-${{ steps.version.outputs.version }}.tar.gz
+          upload_url: ${{ needs.prepare-release.outputs.upload_url }}
+          asset_path: ./dist/tarballs/hom-cli-${{ needs.prepare-release.outputs.version }}-linux-x64.tar.gz
+          asset_name: hom-cli-${{ needs.prepare-release.outputs.version }}.tar.gz
           asset_content_type: application/gzip
+
+  publish-npm:
+    needs: prepare-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Setup Yarn
+        run: |
+          mkdir -p .yarn/releases
+          npm install -g corepack
+          corepack enable
+          corepack prepare yarn@3.7.0 --activate
+          cp ~/.cache/node/corepack/v1/yarn/3.7.0/yarn.js .yarn/releases/yarn-3.7.0.cjs
+      
+      - name: Install dependencies
+        run: yarn install
+      
+      - name: Build
+        run: yarn build
+      
+      - name: Generate oclif manifest
+        run: yarn oclif manifest
       
       - name: Publish to npm
         run: yarn npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+  update-homebrew:
+    needs: [prepare-release, build-tarballs]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       
       - name: Update Homebrew formula
         run: |
