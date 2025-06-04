@@ -20,10 +20,13 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Enable Corepack
+      - name: Setup Yarn
         run: |
+          mkdir -p .yarn/releases
+          npm install -g corepack
           corepack enable
           corepack prepare yarn@3.7.0 --activate
+          cp ~/.cache/node/corepack/v1/yarn/3.7.0/yarn.js .yarn/releases/yarn-3.7.0.cjs
       
       - name: Configure Git
         run: |
