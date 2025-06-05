@@ -5,11 +5,27 @@ on:
     branches: [develop]
     types: [closed]
 
+permissions:
+  contents: write
+  pull-requests: read
+
 jobs:
   version-bump:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - name: Debug GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: |
+          echo "Actor: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Event name: ${{ github.event_name }}"
+          echo "Token permissions:"
+          echo "${{ toJSON(github.token_permissions) }}"
+          echo "Full context:"
+          echo "$GITHUB_CONTEXT"
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -31,10 +47,20 @@ jobs:
       - name: Install dependencies
         run: yarn install
       
-      - name: Configure Git
+      - name: Configure Git for signed commits
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          echo "Configuring git as: github-actions[bot]"
+          git config --get-all user.name
+          git config --get-all user.email
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config commit.gpgsign true
+          git config --global gpg.format ssh
+          git config --global user.signingkey "key::${{ secrets.GITHUB_TOKEN }}"
+          echo "Git configuration complete:"
+          git config --list
       
       - name: Get PR Labels
         id: labels
@@ -72,9 +98,9 @@ jobs:
           git add package.json
           git add README.md
           
-          # Commit and tag
-          git commit -m "Bump version to v${NEW_VERSION} [skip ci]"
-          git tag -a "v${NEW_VERSION}" -m "Version ${NEW_VERSION}"
+          # Commit and tag with signing
+          git commit -S -m "Bump version to v${NEW_VERSION} [skip ci]"
+          git tag -s "v${NEW_VERSION}" -m "Version ${NEW_VERSION}"
           
           # Push changes
           git push
