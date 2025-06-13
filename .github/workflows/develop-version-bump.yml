@@ -47,6 +47,21 @@ jobs:
       - name: Install dependencies
         run: yarn install
       
+      - name: Configure Git for signed commits
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Configuring git as: github-actions[bot]"
+          git config --get-all user.name
+          git config --get-all user.email
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config commit.gpgsign true
+          git config --global gpg.format ssh
+          git config --global user.signingkey "key::${{ secrets.GITHUB_TOKEN }}"
+          echo "Git configuration complete:"
+          git config --list
+      
       - name: Get PR Labels
         id: labels
         run: |
