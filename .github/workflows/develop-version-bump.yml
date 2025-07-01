@@ -14,18 +14,6 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Debug GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: |
-          echo "Actor: ${{ github.actor }}"
-          echo "Repository: ${{ github.repository }}"
-          echo "Event name: ${{ github.event_name }}"
-          echo "Token permissions:"
-          echo "${{ toJSON(github.token_permissions) }}"
-          echo "Full context:"
-          echo "$GITHUB_CONTEXT"
-
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
