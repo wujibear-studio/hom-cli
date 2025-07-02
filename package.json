@@ -80,15 +80,17 @@
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
+    "oclif-dev": "oclif pack --targets=linux-x64,macos-x64,win32-x64",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",
-    "prepack": "yarn build && oclif manifest && oclif readme",
+    "prepack": "yarn build && oclif manifest && oclif readme && node scripts/make-readme-collapsible.js",
     "prepare": "yarn build",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "pack:this": "oclif pack",
-    "version": "oclif readme && git add README.md"
+    "version": "oclif readme && node scripts/make-readme-collapsible.js && git add README.md",
+    "make-readme-collapsible": "node scripts/make-readme-collapsible.js"
   },
-  "version": "0.0.26",
+  "version": "0.0.25",
   "bugs": {
     "url": "https://github.com/wujibear-studio/hom-cli/issues"
   },
