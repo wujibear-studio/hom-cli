@@ -201,4 +201,32 @@ jobs:
         run: |
           ./scripts/update-homebrew.sh
         env:
-          HOMEBREW_GITHUB_TOKEN: ${{ secrets.HOMEBREW_GITHUB_TOKEN }} 
+          HOMEBREW_GITHUB_TOKEN: ${{ secrets.HOMEBREW_GITHUB_TOKEN }}
+
+  sync-develop:
+    needs: [prepare-release, publish-npm, update-homebrew]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Merge main into develop
+        run: |
+          # Switch to develop branch
+          git checkout develop
+          
+          # Pull latest changes
+          git pull origin develop
+          
+          # Merge main into develop
+          git merge origin/main --no-edit
+          
+          # Push the updated develop branch
+          git push origin develop 
