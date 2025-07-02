@@ -39,7 +39,10 @@ USAGE
 ...
 ```
 <!-- usagestop -->
+<details>
+<summary>
 # Commands
+</summary>
 <!-- commands -->
 * [`hom alias NAME CONTENT`](#hom-alias-name-content)
 * [`hom edit [NAME]`](#hom-edit-name)
@@ -69,9 +72,10 @@ USAGE
 * [`hom script [NAME]`](#hom-script-name)
 * [`hom set`](#hom-set)
 
-## `hom alias NAME CONTENT`
 
-creates an alias for your shell
+
+<details>
+<summary><strong>hom alias NAME CONTENT</strong> - creates an alias for your shell</summary>
 
 ```
 USAGE
@@ -90,13 +94,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom alias alias_name "some kind of content"
+
 ```
 
 _See code: [src/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/alias.ts)_
 
-## `hom edit [NAME]`
+</details>
 
-edits a hom file in your editor
+<details>
+<summary><strong>hom edit [NAME]</strong> - edits a hom file in your editor</summary>
 
 ```
 USAGE
@@ -118,13 +124,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom edit -n=mycompany
+
 ```
 
 _See code: [src/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/edit.ts)_
 
-## `hom export NAME CONTENT`
+</details>
 
-creates an export for your shell
+<details>
+<summary><strong>hom export NAME CONTENT</strong> - creates an export for your shell</summary>
 
 ```
 USAGE
@@ -142,13 +150,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom export export_name "some kind of content"
+
 ```
 
 _See code: [src/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/export.ts)_
 
-## `hom function NAME`
+</details>
 
-creates a shell function
+<details>
+<summary><strong>hom function NAME</strong> - creates a shell function</summary>
 
 ```
 USAGE
@@ -167,13 +177,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom function function_name -c "echo $something" -d "this is what it do"
+
 ```
 
 _See code: [src/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/function.ts)_
 
-## `hom help [COMMANDS]`
+</details>
 
-Display help for hom.
+<details>
+<summary><strong>hom help [COMMANDS]</strong> - Display help for hom.</summary>
 
 ```
 USAGE
@@ -187,13 +199,15 @@ FLAGS
 
 DESCRIPTION
   Display help for hom.
+
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/src/commands/help.ts)_
 
-## `hom install`
+</details>
 
-installs hom dependencies, sets defaults
+<details>
+<summary><strong>hom install</strong> - installs hom dependencies, sets defaults</summary>
 
 ```
 USAGE
@@ -204,13 +218,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom install
+
 ```
 
 _See code: [src/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/install.ts)_
 
-## `hom list`
+</details>
 
-lists the docs for shell files within hom
+<details>
+<summary><strong>hom list</strong> - lists the docs for shell files within hom</summary>
 
 ```
 USAGE
@@ -227,13 +243,15 @@ ALIASES
 
 EXAMPLES
   $ hom list -n=mycompany
+
 ```
 
 _See code: [src/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/list.ts)_
 
-## `hom ls`
+</details>
 
-lists the docs for shell files within hom
+<details>
+<summary><strong>hom ls</strong> - lists the docs for shell files within hom</summary>
 
 ```
 USAGE
@@ -280,13 +298,15 @@ ALIASES
 
 EXAMPLES
   $ hom move FILE_NAME
+
 ```
 
 _See code: [src/commands/move.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/move.ts)_
 
-## `hom mv NAME`
+</details>
 
-moves a hom file between namespaces
+<details>
+<summary><strong>hom mv NAME</strong> - moves a hom file between namespaces</summary>
 
 ```
 USAGE
@@ -335,13 +355,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom open -n=mycompany
+
 ```
 
 _See code: [src/commands/open.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/open.ts)_
 
-## `hom partial [NAME]`
+</details>
 
-creates a partial to better organize your shell
+<details>
+<summary><strong>hom partial [NAME]</strong> - creates a partial to better organize your shell</summary>
 
 ```
 USAGE
@@ -360,13 +382,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom partial -n=mycompany
+
 ```
 
 _See code: [src/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/partial.ts)_
 
-## `hom plugins`
+</details>
 
-List installed plugins.
+<details>
+<summary><strong>hom plugins</strong> - List installed plugins.</summary>
 
 ```
 USAGE
@@ -383,13 +407,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom plugins
+
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/index.ts)_
 
-## `hom plugins:install PLUGIN...`
+</details>
 
-Installs a plugin into the CLI.
+<details>
+<summary><strong>hom plugins:install PLUGIN...</strong> - Installs a plugin into the CLI.</summary>
 
 ```
 USAGE
@@ -452,13 +478,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom plugins inspect myplugin
+
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/inspect.ts)_
 
-## `hom plugins:install PLUGIN...`
+</details>
 
-Installs a plugin into the CLI.
+<details>
+<summary><strong>hom plugins:install PLUGIN...</strong> - Installs a plugin into the CLI.</summary>
 
 ```
 USAGE
@@ -496,13 +524,15 @@ EXAMPLES
   $ hom plugins install https://github.com/someuser/someplugin
 
   $ hom plugins install someuser/someplugin
+
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/install.ts)_
 
-## `hom plugins:link PLUGIN`
+</details>
 
-Links a plugin into the CLI for development.
+<details>
+<summary><strong>hom plugins:link PLUGIN</strong> - Links a plugin into the CLI for development.</summary>
 
 ```
 USAGE
@@ -526,13 +556,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom plugins link myplugin
+
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/link.ts)_
 
-## `hom plugins:uninstall PLUGIN...`
+</details>
 
-Removes a plugin from the CLI.
+<details>
+<summary><strong>hom plugins:uninstall PLUGIN...</strong> - Removes a plugin from the CLI.</summary>
 
 ```
 USAGE
@@ -563,13 +595,15 @@ Remove all user-installed and linked plugins.
 ```
 USAGE
   $ hom plugins reset
+
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/reset.ts)_
 
-## `hom plugins:uninstall PLUGIN...`
+</details>
 
-Removes a plugin from the CLI.
+<details>
+<summary><strong>hom plugins:uninstall PLUGIN...</strong> - Removes a plugin from the CLI.</summary>
 
 ```
 USAGE
@@ -591,13 +625,15 @@ ALIASES
 
 EXAMPLES
   $ hom plugins uninstall myplugin
+
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/uninstall.ts)_
 
-## `hom plugins:uninstall PLUGIN...`
+</details>
 
-Removes a plugin from the CLI.
+<details>
+<summary><strong>hom plugins:uninstall PLUGIN...</strong> - Removes a plugin from the CLI.</summary>
 
 ```
 USAGE
@@ -635,13 +671,15 @@ FLAGS
 
 DESCRIPTION
   Update installed plugins.
+
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v4.1.17/src/commands/plugins/update.ts)_
 
-## `hom remove NAME`
+</details>
 
-removes a shell file
+<details>
+<summary><strong>hom remove NAME</strong> - removes a shell file</summary>
 
 ```
 USAGE
@@ -666,13 +704,15 @@ ALIASES
 
 EXAMPLES
   $ hom remove FILE_NAME
+
 ```
 
 _See code: [src/commands/remove.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/remove.ts)_
 
-## `hom rm NAME`
+</details>
 
-removes a shell file
+<details>
+<summary><strong>hom rm NAME</strong> - removes a shell file</summary>
 
 ```
 USAGE
@@ -718,13 +758,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom run -n=mycompany
+
 ```
 
 _See code: [src/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/run.ts)_
 
-## `hom script [NAME]`
+</details>
 
-creates a shell script that will NOT be run until called
+<details>
+<summary><strong>hom script [NAME]</strong> - creates a shell script that will NOT be run until called</summary>
 
 ```
 USAGE
@@ -743,13 +785,15 @@ DESCRIPTION
 
 EXAMPLES
   $ hom script -n=mycompany
+
 ```
 
 _See code: [src/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/script.ts)_
 
-## `hom set`
+</details>
 
-sets default hom configurations
+<details>
+<summary><strong>hom set</strong> - sets default hom configurations</summary>
 
 ```
 USAGE
@@ -765,10 +809,14 @@ DESCRIPTION
 
 EXAMPLES
   $ hom set -n=mycompany
+
 ```
 
 _See code: [src/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/set.ts)_
+
+</details>
 <!-- commandsstop -->
+</details>
 
 # Release Flow
 
