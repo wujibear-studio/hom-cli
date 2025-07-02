@@ -90,7 +90,7 @@
     "version": "oclif readme && node scripts/make-readme-collapsible.js && git add README.md",
     "make-readme-collapsible": "node scripts/make-readme-collapsible.js"
   },
-  "version": "0.0.25",
+  "version": "0.0.26",
   "bugs": {
     "url": "https://github.com/wujibear-studio/hom-cli/issues"
   },

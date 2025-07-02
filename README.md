@@ -32,7 +32,7 @@ $ npm install -g hom-cli
 $ hom COMMAND
 running command...
 $ hom (--version)
-hom-cli/0.0.25 linux-x64 node-v18.20.8
+hom-cli/0.0.26 linux-x64 node-v18.20.8
 $ hom --help [COMMAND]
 USAGE
   $ hom COMMAND
@@ -97,7 +97,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/alias.ts)_
+_See code: [src/commands/alias.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/alias.ts)_
 
 </details>
 
@@ -127,7 +127,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/edit.ts)_
+_See code: [src/commands/edit.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/edit.ts)_
 
 </details>
 
@@ -153,7 +153,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/export.ts)_
+_See code: [src/commands/export.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/export.ts)_
 
 </details>
 
@@ -180,7 +180,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/function.ts)_
+_See code: [src/commands/function.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/function.ts)_
 
 </details>
 
@@ -221,7 +221,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/install.ts)_
+_See code: [src/commands/install.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/install.ts)_
 
 </details>
 
@@ -246,7 +246,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/list.ts)_
+_See code: [src/commands/list.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/list.ts)_
 
 </details>
 
@@ -301,7 +301,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/move.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/move.ts)_
+_See code: [src/commands/move.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/move.ts)_
 
 </details>
 
@@ -358,7 +358,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/open.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/open.ts)_
+_See code: [src/commands/open.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/open.ts)_
 
 </details>
 
@@ -385,7 +385,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/partial.ts)_
+_See code: [src/commands/partial.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/partial.ts)_
 
 </details>
 
@@ -707,7 +707,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/remove.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/remove.ts)_
+_See code: [src/commands/remove.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/remove.ts)_
 
 </details>
 
@@ -761,7 +761,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/run.ts)_
+_See code: [src/commands/run.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/run.ts)_
 
 </details>
 
@@ -788,7 +788,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/script.ts)_
+_See code: [src/commands/script.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/script.ts)_
 
 </details>
 
@@ -812,7 +812,7 @@ EXAMPLES
 
 ```
 
-_See code: [src/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.25/src/commands/set.ts)_
+_See code: [src/commands/set.ts](https://github.com/wujibear-studio/hom-cli/blob/v0.0.26/src/commands/set.ts)_
 
 </details>
 <!-- commandsstop -->
