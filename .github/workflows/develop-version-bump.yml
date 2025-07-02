@@ -73,6 +73,8 @@ jobs:
           
           # Run oclif readme to update version in README
           yarn oclif readme
+          # Make command sections collapsible
+          node scripts/make-readme-collapsible.js
           
           # Get the new version
           NEW_VERSION=$(node -p "require('./package.json').version")
